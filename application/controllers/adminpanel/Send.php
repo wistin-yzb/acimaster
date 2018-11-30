@@ -56,10 +56,20 @@ class Send extends Admin_Controller {
 					));
 			if($t_id)
 			{
-				exit(json_encode(array('status'=>true,'tips'=>'新增成功','t_id'=>$t_id)));
+				#加入任务队列
+				$user_open_ids = array(
+					'OPENID20181120333',
+					'OPENID20181120890',
+				);
+				$data_info =$this->Send_model->inqueue($user_open_ids);
+				if($data_info){					
+					exit(json_encode(array('status'=>true,'tips'=>'新增推送消息成功','t_id'=>$t_id)));
+				}else{
+					exit(json_encode(array('status'=>false,'tips'=>'新增推送消息失败','t_id'=>0)));
+				}
 			}else
 			{
-				exit(json_encode(array('status'=>false,'tips'=>'新增失败','t_id'=>0)));
+				exit(json_encode(array('status'=>false,'tips'=>'新增推送消息失败','t_id'=>0)));
 			}
 		}else{
 			$this->view('edit',array('is_edit'=>false,'require_js'=>true,'data_info'=>$this->Send_model->default_info()));

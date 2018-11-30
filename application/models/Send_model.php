@@ -108,4 +108,43 @@ class Send_model extends Base_Model {
 				'push_status'=>0,
 		);
 	}
+	
+	//入队
+	function inqueue($data){
+		if(empty($data))return false;
+		$redis = new redis();
+		$redis->connect('127.0.0.1',6379);
+		$redis->auth('admin888');
+		$redis -> select('0');
+		$data = json_encode($data);
+		$in = $redis->rpush('groupsend',$data);
+		if($in){
+			return true;
+		}
+		return false;
+	}
+	
+	//出队#!/usr/bin/php
+	function outqueue()
+	{
+		$redis = new redis();
+		$redis->connect('127.0.0.1',6379);
+		$redis->auth('admin888');		
+		$redis -> select('0');
+		$value = $redis->lpop('groupsend');
+		$value = json_decode($value,true);
+		echo '<pre>';
+		var_dump($value);
+	}
+	
+	//获取队列中所有数据
+	function getlistqueue(){
+		$redis = new redis();
+		$redis->connect('127.0.0.1',6379);
+		$redis->auth('admin888');
+		$redis -> select('0');
+		$list = $redis->lrange('groupsend',0,-1);
+		var_dump($list);
+	}
+	
 }
