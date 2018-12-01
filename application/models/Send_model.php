@@ -1,9 +1,14 @@
 <?php
 class Send_model extends Base_Model {
 	var $page_size = 10;
+	
+	var $appid= 'wxcc25e743d871491c';
+	var $appsecret= 'cf25c60d878bbba24e1ef768908c2add';	
 	public function __construct() {
 		$this->db_tablepre = 't_sys_';
 		$this->table_name = 'send';
+		
+		
 		parent::__construct ();
 	}
 	public function rows() {
@@ -110,18 +115,22 @@ class Send_model extends Base_Model {
 	}
 	
 	//入队
-	function inqueue($data){
+	function inqueue($data,$opt_data){
 		if(empty($data))return false;
 		$redis = new redis();
 		$redis->connect('127.0.0.1',6379);
 		$redis->auth('admin888');
 		$redis -> select('0');
-		$data = json_encode($data);
-		$in = $redis->rpush('groupsend',$data);
-		if($in){
-			return true;
-		}
-		return false;
+		$i=0;
+		while(true){
+		     if($i>count($data)){
+		     	$redis->rpush('groupdata',json_encode($opt_data));	
+		        $redis ->close();
+				return true;
+			}
+			$redis->rpush('groupsend',$data[$i]);						
+			$i++;
+		}		
 	}
 	
 	//出队#!/usr/bin/php
@@ -147,4 +156,149 @@ class Send_model extends Base_Model {
 		var_dump($list);
 	}
 	
+	//单条发送模板消息
+	function send_template_msg($access_token='',$openid='',$opt_data){				
+		if(!$access_token||!$openid||!$opt_data){
+			return -1;
+		}
+		$template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=$access_token";		
+		$post_arr = array(
+				"touser"=>$openid,
+				"template_id"=>"{$opt_data['template_id']}",
+				"url"=>"{$opt_data['url']}",
+				"data"=>array(
+						"first"=>array(
+								"value"=>"{$opt_data['first']}",
+								"color"=>"#173177"
+						),						
+						"keyword1"=>array(
+								"value"=>"{$opt_data['keyword1']}",
+								"color"=>"#173177"
+						),
+						"keyword2"=>array(
+								"value"=>"{$opt_data['keyword2']}",
+								"color"=>"#173177"
+						),
+						"keyword3"=>array(
+								"value"=>"{$opt_data['keyword3']}",
+								"color"=>"#173177"
+						),
+						"keyword4"=>array(
+								"value"=>"{$opt_data['keyword4']}",
+								"color"=>"#173177"
+						),
+						"keyword5"=>array(
+								"value"=>"{$opt_data['keyword5']}",
+								"color"=>"#173177"
+						),
+						"remark"=>array(
+								"value"=>"{$opt_data['remark']}",
+								"color"=>"#173177"
+						),
+				),
+		);
+		$post_json = json_encode($post_arr);		
+		return self::https_request($template_url,$post_json);
+	}
+	
+	//获取access_token
+	function get_access_token(){
+		$token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$this->appid.'&secret='.$this->appsecret;
+		$access_token = @file_get_contents('access_token.txt');
+		$expire_time = @file_get_contents('expire_time.txt');
+		$template_id = "sUroer1rqkwvMVL4pQK2GYk4itRb_qLacN_FzAZ5i5E";
+		//get access_token
+		if(!$access_token||$expire_time<time()){ //过期重新获取
+			$json = $this->Send_model->https_request($token_url);
+			$arr = json_decode($json,true);
+			if($arr['access_token']){
+				$access_token = $arr['access_token'];
+				//将创新获取的access_token存到txt
+				file_put_contents('access_token.txt',$access_token);
+				file_put_contents('expire_time.txt',time()+7000);
+			}else{
+				return -1;
+			}
+		}
+		return $access_token;
+	}
+	
+	//获取指定公众号的关注用户列表[5w以内]
+	function get_subscribe_user_list($access_token){
+		$remote_url_1 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token";		
+		$ret = $this->https_request($remote_url_1);
+		$json = json_decode($ret,true);
+		$openid_arr = array();
+		$openid_arr = $json['data']['openid'];
+		if($json['total']<=10000){ //小于1w
+			$total_openid_arr =  $openid_arr;
+	    }elseif($json['total']>10000){//小于2w
+			$remote_url_2 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[9999]";
+			$ret_2 = $this->https_request($remote_url_2);
+			$json_2 = json_decode($ret_2,true);
+			$openid_arr_2 = array();
+			$openid_arr_2 = $json_2['data']['openid'];					
+			$total_openid_arr = array_merge($openid_arr,$openid_arr_2);		
+	    }elseif($json['total']>20000){//小于3w
+	    	$remote_url_3 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[19999]";
+	    	$ret_3 = $this->https_request($remote_url_3);
+	    	$json_3 = json_decode($ret_3,true);
+	    	$openid_arr_3 = array();
+	    	$openid_arr_3 = $json_3['data']['openid'];
+	    	$total_openid_arr = array_merge($openid_arr,$openid_arr_2,$openid_arr_3);		
+	    }elseif($json['total']>30000){//小于4w
+	    	$remote_url_4 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[29999]";
+	    	$ret_4 = $this->https_request($remote_url_4);
+	    	$json_4 = json_decode($ret_4,true);
+	    	$openid_arr_4 = array();
+	    	$openid_arr_4 = $json_4['data']['openid'];
+	    	$total_openid_arr = array_merge($openid_arr,$openid_arr_2,$openid_arr_3,$openid_arr_4);
+	    }elseif($json['total']>40000){//小于5w
+	    	$remote_url_5 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[39999]";
+	    	$ret_5 = $this->https_request($remote_url_5);
+	    	$json_5 = json_decode($ret_5,true);
+	    	$openid_arr_5 = array();
+	    	$openid_arr_5 = $json_5['data']['openid'];
+	    	$total_openid_arr = array_merge($openid_arr,$openid_arr_2,$openid_arr_3,$openid_arr_4,$openid_arr_5);
+	    }
+	    file_put_contents('alluserlist.txt', json_encode($total_openid_arr));
+		return $total_openid_arr; 
+	}
+	
+	//获取用户基本信息:http请求方式: GET
+	function get_user_info($access_token='',$openid=''){
+		if(!$access_token&&!$openid){
+			return -1;
+		}
+		$url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$access_token&openid=$openid&lang=zh_CN";
+		$json = $this->https_request($url);
+		$ret   = json_decode($json,true);
+		return $ret;
+	}
+	
+	//网页授权
+	function auth2($code){
+		$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$this->appid&secret=$this->appsecret&code=$code&grant_type=authorization_code";
+		$json = $this->https_request($url);
+		file_put_contents('myopenid.txt', $json);
+	}
+	
+	//远程post请求
+	function https_request($url,$data = NULL)
+	{
+		$curl = curl_init();
+		curl_setopt($curl,CURLOPT_URL,$url);
+		curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+		curl_setopt($curl,CURLOPT_SSL_VERIFYHOST,false);
+		if (!empty($data))
+		{
+			curl_setopt($curl,CURLOPT_POST,1);
+			curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
+			//curl_setopt($curl,CURLOPT_POSTFIELDS,http_build_query($data));
+		}
+		curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+		$output = curl_exec($curl);
+		curl_close($curl);
+		return $output;
+	}
 }

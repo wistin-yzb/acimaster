@@ -36,37 +36,38 @@ class Send extends Admin_Controller {
 			$temp_id = isset($_POST["temp_id"])?trim(safe_replace($_POST["temp_id"])):exit(json_encode(array('status'=>false,'tips'=>'模板id不能为空')));
 			if($temp_id=='')exit(json_encode(array('status'=>false,'tips'=>'模板不能为空')));
 			$push_status = 1;//推送状态,1成功,0失败
-			$t_id = $this->Send_model->insert(
-					array(
-							'send_time'=>$_POST["send_time"],
-							'temp_id'=>$temp_id,							
-							'first'=>$_POST["first"],
-							'keyword1'=>$_POST["keyword1"],
-							'keyword2'=>$_POST["keyword2"],
-							'keyword3'=>$_POST["keyword3"],
-							'keyword4'=>$_POST["keyword4"],
-							'keyword5'=>$_POST["keyword5"],
-							'invest_style'=>$_POST["invest_style"],
-							'invest_profit'=>$_POST["invest_profit"],
-							'remark'=>$_POST["remark"],
-							'url'=>$_POST["url"],
-							'push_status'=>$push_status,
-							'create_time'=>date('Y-m-d H:i:s'),
-							'update_time'=>date('Y-m-d H:i:s'),
-					));
+			$opt_data = array(
+					'send_time'=>$_POST["send_time"],
+					'temp_id'=>$temp_id,
+					'first'=>$_POST["first"],
+					'keyword1'=>$_POST["keyword1"],
+					'keyword2'=>$_POST["keyword2"],
+					'keyword3'=>$_POST["keyword3"],
+					'keyword4'=>$_POST["keyword4"],
+					'keyword5'=>$_POST["keyword5"],
+					'invest_style'=>$_POST["invest_style"],
+					'invest_profit'=>$_POST["invest_profit"],
+					'remark'=>$_POST["remark"],
+					'url'=>$_POST["url"],
+					'push_status'=>$push_status,
+					'create_time'=>date('Y-m-d H:i:s'),
+					'update_time'=>date('Y-m-d H:i:s'),
+			);
+			$t_id = $this->Send_model->insert($opt_data);
 			if($t_id)
 			{
 				#加入任务队列
-				$user_open_ids = array(
-					'OPENID20181120333',
-					'OPENID20181120890',
-				);
-				$data_info =$this->Send_model->inqueue($user_open_ids);
-				if($data_info){					
-					exit(json_encode(array('status'=>true,'tips'=>'新增推送消息成功','t_id'=>$t_id)));
-				}else{
-					exit(json_encode(array('status'=>false,'tips'=>'新增推送消息失败','t_id'=>0)));
-				}
+				$access_token  =$this->Send_model->get_access_token();
+				if($access_token!=-1&&!empty($access_token)){
+					$user_list = $this->Send_model->get_subscribe_user_list($access_token);
+					$opt_data['access_token'] = $access_token;
+					$inret = @$this->Send_model->inqueue($user_list,$opt_data);	
+					if($inret){
+						exit(json_encode(array('status'=>true,'tips'=>'新增推送消息成功','t_id'=>$t_id)));
+					}else{
+						exit(json_encode(array('status'=>false,'tips'=>'新增推送消息失败','t_id'=>0)));
+					}
+				}				
 			}else
 			{
 				exit(json_encode(array('status'=>false,'tips'=>'新增推送消息失败','t_id'=>0)));
@@ -126,6 +127,9 @@ class Send extends Admin_Controller {
 	 * @return void
 	 */
 	function browser($id){		
+		header('Content-Type:text/html;charset=utf-8');
+		date_default_timezone_set('PRC');
+		set_time_limit(30);
 		$id = intval($id);
 		$data_info =$this->Send_model->get_one(array('id'=>$id));
 		if(!$data_info)$this->showmessage('信息不存在');		
