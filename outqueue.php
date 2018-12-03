@@ -1,26 +1,23 @@
-<?php
+﻿<?php
 $redis = new redis();
 $redis->connect('127.0.0.1',6379);
 $redis->auth('admin888');
 $redis -> select('0');
 $list = $redis->lrange('groupsend',0,-1);
-$opt_data = $redis->lrange('groupdata',0,-1);
 
 if($list){
 	$i=0;
 	$len = $redis->lLen('groupsend');
-	//file_put_contents('/usr/local/etc/outqueuelen.txt',$len);
 	while(true){
-		if($i>$len){
-			//file_put_contents('/usr/local/etc/outqueueoptdata.txt',$opt_data);
-			$redis->lpop('groupdata');
+		if($i>$len){		
 			$redis ->close();
 			file_put_contents('/usr/local/etc/outqueuecok.txt',1);
+			@unlink('/usr/local/etc/groupdata.txt');
 		}
 		$openid = $redis->lpop('groupsend');
-		if($openid&&$opt_data){
-		 //send template msg		 
-		 send_template_msg($openid,$opt_data);			
+		if($openid){
+		 //send-msg		 
+		 send_template_msg($openid);			
 		}
 		$i++;
         }
@@ -29,54 +26,91 @@ if($list){
 }
 
 //send template msg
-function send_template_msg($openid,$opt_data){
-     if(!$openid||!$opt_data){
+function send_template_msg($openid){
+     if(!$openid){
 	return -1;
-     }       
-     $post_data = json_decode($opt_data);
-     $template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$post_data['access_token']}";        
-     
-     file_put_contents('/usr/local/etc/outqueuec-template_url.txt',$opt_data);
-     return 12;
-     
+     }      
+             
+     $opt_json = json_decode(file_get_contents('/usr/local/etc/groupdata.txt'));       
+     $template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$opt_json->access_token}";             
+    	
      $post_arr = array(
 		"touser"=>$openid,
-		"template_id"=>"{$opt_data['temp_id']}",
-		"url"=>"{$opt_data['url']}",
-		"data"=>array(
+		"template_id"=>$opt_json->temp_id,
+		"url"=>$opt_json->url,
+		/*"data"=>array(
 				"first"=>array(
-						"value"=>"{$post_data['first']}",
+						"value"=>$opt_json->first,
 						"color"=>"#173177"
 				),						
 				"keyword1"=>array(
-						"value"=>"{$post_data['keyword1']}",
+						"value"=>$opt_json->keyword1,
 						"color"=>"#173177"
 				),
 				"keyword2"=>array(
-						"value"=>"{$post_data['keyword2']}",
+						"value"=>$opt_json->keyword2,
 						"color"=>"#173177"
 				),
 				"keyword3"=>array(
-						"value"=>"{$post_data['keyword3']}",
+						"value"=>$opt_json->keyword3,
 						"color"=>"#173177"
 				),
 				"keyword4"=>array(
-						"value"=>"{$post_data['keyword4']}",
+						"value"=>$opt_json->keyword4,
 						"color"=>"#173177"			
 				),
 				"keyword5"=>array(
-						"value"=>"{$post_data['keyword4']}",
+						"value"=>$opt_json->keyword4,
 						"color"=>"#173177"			
 				),
 				"remark"=>array(
-						"value"=>"{$post_data['remark']}",
+						"value"=>$opt_json->remark,
 						"color"=>"#173177"
+				),
+		),*/
+		"data"=>array(
+				"first"=>array(
+						"value"=>$opt_json->first,
+						"color"=>"#727193"
+				),						
+				"showname"=>array(
+						"value"=>$opt_json->keyword1,
+						"color"=>"#727193"
+				),
+				"ticket_qty"=>array(
+						"value"=>$opt_json->keyword2,
+						"color"=>"#727193"
+				),
+				"showtime"=>array(
+						"value"=>$opt_json->keyword3,
+						"color"=>"#727193"
+				),
+				"keyword4"=>array(
+						"value"=>$opt_json->keyword4,
+						"color"=>"#727193"			
+				),
+				"keyword5"=>array(
+						"value"=>$opt_json->keyword4,
+						"color"=>"#727193"			
+				),
+				"remark"=>array(
+						"value"=>$opt_json->remark,
+						"color"=>"#727193"
 				),
 		),
 		);
-		$post_json = json_encode($post_arr);     
-	//$this->https_request($template_url,$post_json);		
+         $post_json = json_encode($post_arr);  
+	 //file_put_contents('/usr/local/etc/outqueue-debug.txt',$post_json.PHP_EOL,FILE_APPEND);                  
+	 $ret = https_request($template_url,$post_json);		
+	 //file_put_contents('/usr/local/etc/outqueue-last.txt',$ret.PHP_EOL,FILE_APPEND);
 }
+
+function f5($str)
+{ 
+$result = array(); 
+preg_match_all("/(?:\{)(.*)(?:\})/i",$str, $result); 
+return $result[1][0]; 
+} 
 
 //remote-post
 function https_request($url,$data = NULL)

@@ -59,7 +59,8 @@ class Send extends Admin_Controller {
 				#加入任务队列
 				$access_token  =$this->Send_model->get_access_token();
 				if($access_token!=-1&&!empty($access_token)){
-					$user_list = $this->Send_model->get_subscribe_user_list($access_token);
+					//$user_list = $this->Send_model->get_subscribe_user_list($access_token);
+					$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
 					$opt_data['access_token'] = $access_token;
 					$inret = @$this->Send_model->inqueue($user_list,$opt_data);	
 					if($inret){
@@ -131,9 +132,25 @@ class Send extends Admin_Controller {
 		date_default_timezone_set('PRC');
 		set_time_limit(30);
 		$id = intval($id);
-		$data_info =$this->Send_model->get_one(array('id'=>$id));
+		$data_info =$this->Send_model->get_one(array('id'=>$id));		
 		if(!$data_info)$this->showmessage('信息不存在');		
 		$this->view('browser',array('is_browser'=>true,'data_info'=>$data_info,'require_js'=>true));
+	}
+	
+	//weixin-redirect_url
+	function wechat_redirect(){
+		$APPID = "wxcc25e743d871491c";
+		$REDIRECT_URI = "http://send.eatuo.com/adminpanel/send/auth2";
+		$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$APPID&redirect_uri=$REDIRECT_URI&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+		header("location:$url");exit;
+	}
+	
+	//auth2.0授权
+	function auth2(){
+		if(!$_GET['code']){
+			exit('invalid code');
+		}
+		$this->Send_model->getauth2($_GET['code']);
 	}
 	
 	/**

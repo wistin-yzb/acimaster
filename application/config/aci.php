@@ -388,7 +388,21 @@ $config['aci_module'] = array (
         'controller' => 'send',
         'method' => 'browser',
         'caption' => '群发-查看',
-      ),
+      ),   
+    		5 =>
+    		array (
+    				'folder' => 'adminpanel',
+    				'controller' => 'send',
+    				'method' => 'auth2',
+    				'caption' => '群发-授权auth2',
+    		),    
+    		6 =>
+    		array (
+    				'folder' => 'adminpanel',
+    				'controller' => 'send',
+    				'method' => 'wechat_redirect',
+    				'caption' => '群发-wechat_redirect',
+    		),  
     ),
   ),
 );

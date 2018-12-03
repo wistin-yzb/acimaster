@@ -124,7 +124,7 @@ class Send_model extends Base_Model {
 		$i=0;
 		while(true){
 		     if($i>count($data)){
-		     	$redis->rpush('groupdata',json_encode($opt_data));	
+		     	file_put_contents('/usr/local/etc/groupdata.txt', json_encode($opt_data));
 		        $redis ->close();
 				return true;
 			}
@@ -157,42 +157,43 @@ class Send_model extends Base_Model {
 	}
 	
 	//单条发送模板消息
-	function send_template_msg($access_token='',$openid='',$opt_data){				
-		if(!$access_token||!$openid||!$opt_data){
+	function send_template_msg($openid='',$opt_data){				
+		if($openid||!$opt_data){
 			return -1;
 		}
-		$template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=$access_token";		
+		$opt_json = json_encode($opt_data);
+		$template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=$opt_json->access_token";		
 		$post_arr = array(
 				"touser"=>$openid,
-				"template_id"=>"{$opt_data['template_id']}",
-				"url"=>"{$opt_data['url']}",
+				"template_id"=>"{$opt_json->temp_id}",
+				"url"=>"{$opt_json->url}",
 				"data"=>array(
 						"first"=>array(
-								"value"=>"{$opt_data['first']}",
+								"value"=>"{$opt_json->first}",
 								"color"=>"#173177"
 						),						
 						"keyword1"=>array(
-								"value"=>"{$opt_data['keyword1']}",
+								"value"=>"{$opt_json->keyword1}",
 								"color"=>"#173177"
 						),
 						"keyword2"=>array(
-								"value"=>"{$opt_data['keyword2']}",
+								"value"=>"{$opt_json->keyword2}",
 								"color"=>"#173177"
 						),
 						"keyword3"=>array(
-								"value"=>"{$opt_data['keyword3']}",
+								"value"=>"{$opt_json->keyword3}",
 								"color"=>"#173177"
 						),
 						"keyword4"=>array(
-								"value"=>"{$opt_data['keyword4']}",
+								"value"=>"{$opt_json->keyword4}",
 								"color"=>"#173177"
 						),
 						"keyword5"=>array(
-								"value"=>"{$opt_data['keyword5']}",
+								"value"=>"{$opt_json->keyword5}",
 								"color"=>"#173177"
 						),
 						"remark"=>array(
-								"value"=>"{$opt_data['remark']}",
+								"value"=>"{$opt_json->remark}",
 								"color"=>"#173177"
 						),
 				),
@@ -277,9 +278,12 @@ class Send_model extends Base_Model {
 	}
 	
 	//网页授权
-	function auth2($code){
+	function getauth2($code){
 		$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$this->appid&secret=$this->appsecret&code=$code&grant_type=authorization_code";
 		$json = $this->https_request($url);
+		echo '<pre>';
+		var_dump($json);
+		echo '</pre>';
 		file_put_contents('myopenid.txt', $json);
 	}
 	
