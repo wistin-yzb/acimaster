@@ -3,7 +3,7 @@ class Send extends Admin_Controller {
 	function __construct() {
 		parent::__construct ();
 		$this->load->model ( array (
-				'Send_model' 
+				'Send_model' ,'Service_model' ,
 		) );
 	}
 	function index($page_no=1) {
@@ -26,18 +26,19 @@ class Send extends Admin_Controller {
 	 * @param post data
 	 * @return void
 	 */
-	function add(){
+	function add(){				
 		//如果是AJAX请求
 		if($this->input->is_ajax_request())
 		{
 			//接收POST参数
-			$send_time = isset($_POST["send_time"])?trim(safe_replace($_POST["send_time"])):exit(json_encode(array('status'=>false,'tips'=>'时间不能为空')));
-			if($send_time=='')exit(json_encode(array('status'=>false,'tips'=>'时间不能为空')));
-			$temp_id = isset($_POST["temp_id"])?trim(safe_replace($_POST["temp_id"])):exit(json_encode(array('status'=>false,'tips'=>'模板id不能为空')));
-			if($temp_id=='')exit(json_encode(array('status'=>false,'tips'=>'模板不能为空')));
+			$service_id = isset($_POST["service_id"])?trim(safe_replace($_POST["service_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
+			if($service_id==0)exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
+			$temp_id = isset($_POST["temp_id"])?trim(safe_replace($_POST["temp_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择模板编号')));
+			if($temp_id=='')exit(json_encode(array('status'=>false,'tips'=>'请选择模板编号')));
 			$push_status = 1;//推送状态,1成功,0失败
 			$opt_data = array(
-					'send_time'=>$_POST["send_time"],
+					'service_id'=>$_POST["service_id"],
+					'account_name'=>$_POST["account_name"],
 					'temp_id'=>$temp_id,
 					'first'=>$_POST["first"],
 					'keyword1'=>$_POST["keyword1"],
@@ -50,17 +51,25 @@ class Send extends Admin_Controller {
 					'remark'=>$_POST["remark"],
 					'url'=>$_POST["url"],
 					'push_status'=>$push_status,
-					'create_time'=>date('Y-m-d H:i:s'),
 					'update_time'=>date('Y-m-d H:i:s'),
 			);
 			$t_id = $this->Send_model->insert($opt_data);
 			if($t_id)
 			{
+				//获取当前公众号配置信息
+				$where = "id={$_POST['service_id']}";//你要查询的条件
+				$field = "app_id,app_secret";
+				$orderby = "";
+				$groupby = "";
+				$service_info = $this->Service_model-> get_one($where, '*', $orderby,$groupby);
 				#加入任务队列
-				$access_token  =$this->Send_model->get_access_token();
+				$appid = $service_info["app_id"];
+				$appsecret = $service_info["app_secret"];				
+				$access_token  =$this->Send_model->get_access_token($appid,$appsecret);
 				if($access_token!=-1&&!empty($access_token)){
 					//$user_list = $this->Send_model->get_subscribe_user_list($access_token);
-					$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
+					//$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
+					$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
 					$opt_data['access_token'] = $access_token;
 					$inret = @$this->Send_model->inqueue($user_list,$opt_data);	
 					if($inret){
@@ -74,7 +83,17 @@ class Send extends Admin_Controller {
 				exit(json_encode(array('status'=>false,'tips'=>'新增推送消息失败','t_id'=>0)));
 			}
 		}else{
-			$this->view('edit',array('is_edit'=>false,'require_js'=>true,'data_info'=>$this->Send_model->default_info()));
+			//核查是否已经添加公众号
+			$where = "id > 0 and status=1";//你要查询的条件
+			$field = "id as service_id,app_id,app_secret,account_name";//你要显示的字段
+			$orderby = "id desc";//排序方式
+			$groupby = "";//GROUP
+			//从table1表中拉取全部数据
+			$service_list = $this->Service_model->select($where , $field, $orderby, $groupby);
+			if(!$service_list){
+				$this->showmessage('请先添加公众号信息','',3000);exit();
+			}
+			$this->view('edit',array('is_edit'=>false,'require_js'=>true,'data_info'=>$this->Send_model->default_info(),'service_list'=>$service_list));
 		}
 	}
 
@@ -83,42 +102,77 @@ class Send extends Admin_Controller {
 	 * @param post id
 	 * @return void
 	 */
-	function edit($id=0){
+	function edit($id=0){		
 		$id = intval($id);
 		$data_info =$this->Send_model->get_one(array('id'=>$id));
 		//如果是AJAX请求
 		if($this->input->is_ajax_request())
 		{
-			if(!$data_info)exit(json_encode(array('status'=>false,'tips'=>'信息不存在')));			
-			$temp_id = isset($_POST["temp_id"])?trim(safe_replace($_POST["temp_id"])):exit(json_encode(array('status'=>false,'tips'=>'模板id不能为空')));
-			$push_status = $_POST["push_status"];//推送状态,1成功,0失败
+			$service_id = isset($_POST["service_id"])?trim(safe_replace($_POST["service_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
+			if($service_id==0)exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
+			$temp_id = isset($_POST["temp_id"])?trim(safe_replace($_POST["temp_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择模板编号')));
+			if($temp_id=='')exit(json_encode(array('status'=>false,'tips'=>'请选择模板编号')));
+			$push_status = 1;//推送状态,1成功,0失败
+			$opt_data = array(
+					'service_id'=>$_POST["service_id"],
+					'account_name'=>$_POST["account_name"],
+					'temp_id'=>$temp_id,
+					'first'=>$_POST["first"],
+					'keyword1'=>$_POST["keyword1"],
+					'keyword2'=>$_POST["keyword2"],
+					'keyword3'=>$_POST["keyword3"],
+					'keyword4'=>$_POST["keyword4"],
+					'keyword5'=>$_POST["keyword5"],
+					'invest_style'=>$_POST["invest_style"],
+					'invest_profit'=>$_POST["invest_profit"],
+					'remark'=>$_POST["remark"],
+					'url'=>$_POST["url"],
+					'push_status'=>$push_status,
+					'update_time'=>date('Y-m-d H:i:s'),
+			);
 			$status = $this->Send_model->update(
-					array(
-							'temp_id'=>$temp_id,
-							'first'=>$_POST["first"],
-							'keyword1'=>$_POST["keyword1"],
-							'keyword2'=>$_POST["keyword2"],
-							'keyword3'=>$_POST["keyword3"],
-							'keyword4'=>$_POST["keyword4"],
-							'keyword5'=>$_POST["keyword5"],
-							'invest_style'=>$_POST["invest_style"],
-							'invest_profit'=>$_POST["invest_profit"],
-							'remark'=>$_POST["remark"],
-							'url'=>$_POST["url"],
-							'push_status'=>$push_status,
-							'create_time'=>date('Y-m-d H:i:s'),
-							'update_time'=>date('Y-m-d H:i:s'),
-					),array('id'=>$id));			
+					$opt_data,array('id'=>$id));			
 			if($status)
 			{
-				exit(json_encode(array('status'=>true,'tips'=>'修改成功')));
+				//获取当前公众号配置信息
+				$where = "id={$_POST['service_id']}";//你要查询的条件
+				$field = "app_id,app_secret";
+				$orderby = "";
+				$groupby = "";
+				$service_info = $this->Service_model-> get_one($where, '*', $orderby,$groupby);
+				#加入任务队列
+				$appid = $service_info["app_id"];
+				$appsecret = $service_info["app_secret"];
+				$access_token  =$this->Send_model->get_access_token($appid,$appsecret);
+				if($access_token!=-1&&!empty($access_token)){
+					//$user_list = $this->Send_model->get_subscribe_user_list($access_token);
+					//$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
+					$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
+					$opt_data['access_token'] = $access_token;
+					$inret = @$this->Send_model->inqueue($user_list,$opt_data);
+					if($inret){						
+						exit(json_encode(array('status'=>true,'tips'=>'修改成功')));
+					}else{						
+						exit(json_encode(array('status'=>false,'tips'=>'修改失败')));
+					}
+				}
 			}else
 			{
 				exit(json_encode(array('status'=>false,'tips'=>'修改失败')));
 			}
 		}else{
+			//核查是否已经添加公众号
+			$where = "id > 0 and status=1";//你要查询的条件
+			$field = "id as service_id,app_id,app_secret,account_name";//你要显示的字段
+			$orderby = "id desc";//排序方式
+			$groupby = "";//GROUP
+			//从table1表中拉取全部数据
+			$service_list = $this->Service_model->select($where , $field, $orderby, $groupby);
+			if(!$service_list){
+				$this->showmessage('请先添加公众号信息','',3000);exit();
+			}			
 			if(!$data_info)$this->showmessage('信息不存在');
-			$this->view('edit',array('is_edit'=>true,'data_info'=>$data_info,'require_js'=>true));
+			$this->view('edit',array('is_edit'=>true,'data_info'=>$data_info,'require_js'=>true,'service_list'=>$service_list));
 		}
 	}
 	
@@ -172,5 +226,19 @@ class Send extends Admin_Controller {
 				$this->showmessage('操作失败');
 			}
 		}
+	}
+	
+	/**
+	 * 获取模板消息列表
+	 */
+	function get_template_list(){		
+		$appid = @$_REQUEST['appid'];
+		$appsecret = @$_REQUEST['appsecret'];
+		if(!$appid||!$appsecret){
+			exit(json_encode(-1));
+		}
+		$access_token  =$this->Send_model->get_access_token($appid,$appsecret);
+		$list = $this->Send_model->get_template_list($access_token);
+		echo json_encode($list['template_list']);exit();
 	}
 }

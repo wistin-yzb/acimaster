@@ -4,6 +4,7 @@
 	.tgl{text-align:left !important;}
 	.tipmsg{font-size:12px;height:33px;line-height:33px;background-color:whitesmoke;}
 	.edit_send_time{position:relative;top:.6rem;}
+	#template_number>.tps{padding: 0 20px 0 0;font-size: 14px;position: relative;top: 5px;height: 33px;line-height: 33px;}
 </style>
 <form class="form-horizontal" role="form" id="validateform" name="validateform" action="<?php echo current_url()?>" >
 <div class='panel panel-default'>
@@ -31,82 +32,88 @@
                   4、每个账号可以同时使用25个模板。<br/>
                   5、<font color="red">当前每个账号的模板消息的日调用上限为10万次</font>，单个模板没有特殊限制。【2014年11月18日将接口调用频率从默认的日1万次提升为日10万次，可在MP登录后的开发者中心查看】。当账号粉丝数超过10W/100W/1000W时，模板消息的日调用上限会相应提升，以公众号MP后台开发者中心页面中标明的数字为准。
                           <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277" target="_blank"><font color="blue">文档详情</font>&gt;&gt;</a>  
-                  </legend>
-<?php if(!$is_edit):?>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">时间<font color="red">*</font></label>
+                  </legend>                        
+                     <div class="form-group">
+						<label class="col-sm-2 control-label">公众号<font color="red">*</font></label>
 						<div class="col-sm-2">
-							<input type="text" name="send_time"  id="send_time"  class="form-control"  placeholder="" >
+						  <select name="service_id" id="service_id" class="form-control" >
+						         <option value=0 data-appid="0" data-appsecret="0">===请选择===</option>
+						         <?php foreach ($service_list as $k => $v): ?>
+						        <option value=<?php echo $v['service_id']?> data-appid="<?php echo $v['app_id']?>" data-appsecret="<?php echo $v['app_secret']?>"><?php echo $v['account_name'] ?></option>
+						        <?php endforeach; ?>
+						  </select>
+						</div>
+					</div>  
+					<div class="form-group">
+						<label class="col-sm-2 control-label">模板编号<font color="red">*</font></label>
+						<div class="col-sm-8" id="template_number"></div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">发送对象</label>
+						<div class="col-sm-4">
+						    <span class="line-s" style="font-size:9px;">当前公众号下关注的所有用户</span>
 						</div>
 					</div>
-<?php else:?>
+					<div  class="form-group" style="font-size:16px;width:50%;height:33px;line-height:33px;background-color:honeydew;border:1px solid #eee;">
+					         <label  class="col-sm-2 control-label"></label>					         
+					       <div class="col-sm-4"> 模板内容</div>
+					 </div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">时间</label>
-						<div class="col-sm-4"><span id="send_time" class="edit_send_time"><?php echo $data_info['send_time']?></span></div>
-					</div>
-<?php endif;?>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">模板ID<font color="red">*</font></label>
+						<label  class="col-sm-2 control-label">开头first<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="temp_id" type="text" class="form-control validate[required]" id="temp_id" placeholder="(必填)" value="<?php echo $data_info['temp_id']?>" size="120" />
+						  <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="120" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label  class="col-sm-2 control-label"><font color="red">开头first</font></label>
+						<label class="col-sm-2 control-label">中间keyword1<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="first" type="text" class="form-control" id="first" placeholder="" value="<?php echo $data_info['first']?>" size="120" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword1</font></label>
-						<div class="col-sm-4">
-						  <input name="keyword1" type="text" class="form-control" value="<?php echo $data_info['keyword1']?>" id="keyword1" placeholder="" size="120" />
+						  <input name="keyword1" type="text" class="form-control" value="<?php echo $data_info['keyword1']?>" id="keyword1" placeholder="(必填)" size="120" />
 						</div>
 					</div>
                     <div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword2</font></label>
+						<label class="col-sm-2 control-label">中间keyword2<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="keyword2" type="text" class="form-control" value="<?php echo $data_info['keyword2']?>" id="keyword2" placeholder="" size="120" />
+						  <input name="keyword2" type="text" class="form-control" value="<?php echo $data_info['keyword2']?>" id="keyword2" placeholder="(必填)" size="120" />
 						</div>
 					</div> 
                    <div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword3</font></label>
+						<label class="col-sm-2 control-label">中间keyword3<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="keyword3" type="text" class="form-control" value="<?php echo $data_info['keyword3']?>" id="keyword3" placeholder="" size="120" />
+						  <input name="keyword3" type="text" class="form-control" value="<?php echo $data_info['keyword3']?>" id="keyword3" placeholder="(必填)" size="120" />
 						</div>
 					</div>           
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword4</font></label>
+						<label class="col-sm-2 control-label">中间keyword4</label>
 						<div class="col-sm-4">
 						  <input name="keyword4" type="text" class="form-control" value="<?php echo $data_info['keyword4']?>" id="keyword4" placeholder="" size="120" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword5</font></label>
+						<label class="col-sm-2 control-label">中间keyword5</label>
 						<div class="col-sm-4">
 						  <input name="keyword5" type="text" class="form-control" value="<?php echo $data_info['keyword5']?>" id="keyword5" placeholder="" size="120" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间invest_style</font></label>
+						<label class="col-sm-2 control-label">中间invest_style</label>
 						<div class="col-sm-4">
 						  <input name="invest_style" type="text" class="form-control"  value="<?php echo $data_info['invest_style']?>" id="invest_style" placeholder="" size="120" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间invest_profit</font></label>
+						<label class="col-sm-2 control-label">中间invest_profit</label>
 						<div class="col-sm-4">
 						  <input name="invest_profit" type="text" class="form-control" value="<?php echo $data_info['invest_profit']?>" id="invest_profit" placeholder="" size="120" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="red">结尾remark</font></label>
+						<label class="col-sm-2 control-label">结尾remark</label>
 						<div class="col-sm-4">
-						  <input name="remark" type="text" class="form-control" value="<?php echo $data_info['remark']?>" id="remark" placeholder="" size="120" />
+						  <textarea name="remark"  id="remark" class="form-control"><?php echo $data_info['remark']?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">链接url</font></label>
+						<label class="col-sm-2 control-label">跳转链接url</label>
 						<div class="col-sm-4">
 						  <input name="url" type="text" class="form-control" value="<?php echo $data_info['url']?>" id="url" placeholder="" size="120" />
 						</div>
@@ -114,31 +121,32 @@
 			</fieldset>
             <input type="hidden" name="id" id="id" value="<?php echo $data_info['id']?>"/>
             <input type="hidden" name="push_status" id="push_status" value="<?php echo $data_info['push_status']?>"/>
+            <input type="hidden" name="account_name" id="account_name" value="<?php echo $data_info['account_name']?>"/>
 		<div class='form-actions'>
 		<?php aci_ui_button($folder_name,'send','edit',' type="submit" id="dosubmit" class="btn btn-primary " ','立即推送')?>
 		</div>
      </div>
-
+  </div>
 </form>
 <script language="javascript" type="text/javascript">
 	var id = <?php echo $data_info['id']?>;
-	var edit= <?php echo $is_edit?"true":"false"?>;
+	var edit= <?php echo $is_edit?"true":"false"?>;	
 	var folder_name = "<?php echo $folder_name?>";
 	require(['<?php echo SITE_URL?>scripts/common.js'], function (common) {	
-		require(['<?php echo SITE_URL?>scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/edit.js']);		
-		 require(['<?php echo SITE_URL?>scripts//jedate-6.5.0/dist/jedate.min.js'],function(jeDate) {
-		        jeDate("#send_time",{
-		        	theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
-		            format:"YYYY-MM-DD hh:mm:ss",
-		            isTime:true,
-		            isToday:true, 
-		            isClear:true, 
-		            minDate:"2014-09-19 00:00:00",
-		            donefun:function(obj) {
-                             $('#send_time').parent().parent().removeClass('has-error').addClass('has-success');
-			       },   
-		        }) 
-		    });
-	});
+	require(['<?php echo SITE_URL?>scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/edit.js']);		
+		 //require(['<?php echo SITE_URL?>scripts//jedate-6.5.0/dist/jedate.min.js'],function(jeDate) {
+		 //       jeDate("#send_time",{
+		 //       	theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+		 //           format:"YYYY-MM-DD hh:mm:ss",
+		 //           isTime:true,
+		 //           isToday:true, 
+		 //           isClear:true, 
+		 //           minDate:"2014-09-19 00:00:00",
+		  //          donefun:function(obj) {
+          //                   $('#send_time').parent().parent().removeClass('has-error').addClass('has-success');
+		//	       },   
+	     //       }) 
+		//    });
+	});	
 </script>
 <link rel="stylesheet" href="<?php echo SITE_URL?>scripts/jedate-6.5.0/skin/jedate.css">

@@ -14,14 +14,38 @@ define(function (require) {
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {
-			temp_id: {
-				message: '模板id不能为空',
+			first: {
+				message: '开头first不能为空',
 				validators: {
 					notEmpty: {
-						message: '模板id不能为空'
+						message: '开头first不能为空'
 					},	
 				}
 			},
+			keyword1: {
+				message: '中间keyword1不能为空',
+				validators: {
+					notEmpty: {
+						message: '中间keyword1不能为空'
+					},	
+				}
+			},	
+			keyword2: {
+				message: '中间keyword2不能为空',
+				validators: {
+					notEmpty: {
+						message: '中间keyword2不能为空'
+					},	
+				}
+			},	
+			keyword3: {
+				message: '中间keyword3不能为空',
+				validators: {
+					notEmpty: {
+						message: '中间keyword3不能为空'
+					},	
+				}
+			},	
 		}
 	};
 
@@ -34,13 +58,34 @@ define(function (require) {
 				validating: 'glyphicon glyphicon-refresh'
 			},
 			fields: {
-				temp_id: {
+				first: {
 					validators: {
 						notEmpty: {
-							message: '请输入模板id'
+							message: '请输入开头first内容'
 						}
 					}
 				},
+				keyword1: {
+					validators: {
+						notEmpty: {
+							message: '请输入中间keyword1内容'
+						}
+					}
+				},
+				keyword2: {
+					validators: {
+						notEmpty: {
+							message: '请输入中间keyword2内容'
+						}
+					}
+				},	
+				keyword3: {
+					validators: {
+						notEmpty: {
+							message: '请输入中间keyword3内容'
+						}
+					}
+				},		
 			}
 		};
 	}
@@ -71,5 +116,34 @@ define(function (require) {
 		});
 
 	}).on('error.form.bv',function(e){ $.scojs_message('带*号不能为空', $.scojs_message.TYPE_ERROR);$("#dosubmit").removeAttr("disabled");});
-
+     //获取公众号模板列表 
+	  $("#service_id").change(function(){	   
+		 //获取选中的项	
+		  var options =$("#service_id option:selected"); 	  
+		  var val = options.val(); 
+		  var text = options.text();
+		  var appid = options.attr('data-appid');
+		  var appsecret = options.attr('data-appsecret');
+		  var params = {"public_id":val,"appid":appid,"appsecret":appsecret};
+		  var html = '';
+		  $.ajax({
+			  url:"/adminpanel/send/get_template_list",
+			  type:"POST",
+			  dataType: "JSON",
+			  data:params,
+			  success:function(result){		  
+				  console.log('----------------------log===');
+				  console.log(result);
+				  if(result.length<0)return false;
+				  $.each(result,function(index,item){
+					  html+='<span class="tps"><input  type="radio" name="temp_id" style="width:16px ;height:16px;" value="'+item.template_id+'"/>prid=>'+item.template_id+'</span>';
+					  html+='<span class="tps">title=>【'+item.title+'】</span>';
+					  html+='<span class="tps">content=>'+item.content+'</span>';
+					  html+='<span class="tps">example=>'+item.example+'</span>';
+				  });	              
+				  $('#template_number').html(html); 
+		    }});//===End
+		   $('#account_name').val($.trim(text)); 
+		   
+	  })   
 });

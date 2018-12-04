@@ -29,11 +29,11 @@
                     <tr>
                         <th>#</th>
                         <th>编号</th>
-                        <th>模板ID</th>
+                        <th>公众号名称</th>
+                        <th>模板编号</th>
                         <th>keyword1</th>
                         <th>keyword2</th>
                         <th>keyword3</th>
-                        <th>推送时间</th>
                         <th>推送状态</th>
                         <th>更新时间</th>                        
                         <th>操作</th>
@@ -44,11 +44,11 @@
                         <tr>
                             <td><input type="checkbox" name="pid[]" value="<?php echo $v['id'] ?>"/></td>
                             <td><?php echo $v['id'] ?></td>
+                            <td><?php echo $v['account_name'] ?></td>
                             <td><i><?php echo $v['temp_id'] ?></i></td>
                             <td><?php echo $v['keyword1'] ?></td>
                             <td><?php echo $v['keyword2'] ?></td>
-                            <td><?php echo $v['keyword3'] ?></td>
-                            <td><?php echo $v['send_time'] ?></td>                            
+                            <td><?php echo $v['keyword3'] ?></td>                      
                             <td>
                             <?php if($v['push_status']==1): ?>
                              <font color="green">推送成功</font>

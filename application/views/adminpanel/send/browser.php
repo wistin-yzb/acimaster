@@ -19,56 +19,52 @@
 	</div>
 	<div class='panel-body'>
 		<fieldset>
-<?php if(!$is_browser):?>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">时间<font color="red">*</font></label>
-						<div class="col-sm-2">
-							<input type="text" name="send_time"  id="send_time"  class="form-control"  placeholder="" >
-						</div>
+						<label class="col-sm-2 control-label">公众号名称<font color="red">*</font></label>
+						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['account_name']?></span></div>
 					</div>
-<?php endif;?>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">模板ID<font color="red">*</font></label>
+						<label class="col-sm-2 control-label">模板编号<font color="red">*</font></label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['temp_id']?></span></div>
 					</div>
 					<div class="form-group">
-						<label  class="col-sm-2 control-label"><font color="red">开头first</font></label>
+						<label  class="col-sm-2 control-label">开头first<font color="red">*</font></label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['first']?></span></div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword1</font></label>
+						<label class="col-sm-2 control-label">中间keyword1<font color="red">*</font></label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['keyword1']?></span></div>
 					</div>
                     <div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword2</font></label>
+						<label class="col-sm-2 control-label">中间keyword2<font color="red">*</font></label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['keyword2']?></span></div>
 					</div> 
                    <div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword3</font></label>
+						<label class="col-sm-2 control-label">中间keyword3<font color="red">*</font></label>
 						<div class="col-sm-4"> <span class="line-s"><?php echo $data_info['keyword3']?></span></div>
 					</div>           
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword4</font></label>
+						<label class="col-sm-2 control-label">中间keyword4</label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['keyword4']?></span></div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间keyword5</font></label>
+						<label class="col-sm-2 control-label">中间keyword5</label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['keyword5']?></span></div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间invest_style</font></label>
+						<label class="col-sm-2 control-label">中间invest_style</label>
 						<div class="col-sm-4"> <span class="line-s"><?php echo $data_info['invest_style']?></span></div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">中间invest_profit</font></label>
+						<label class="col-sm-2 control-label">中间invest_profit</label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['invest_profit']?></span></div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="red">结尾remark</font></label>
+						<label class="col-sm-2 control-label">结尾remark</label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['remark']?></span></div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label"><font color="blue">链接url</font></label>
+						<label class="col-sm-2 control-label">跳转链接url</label>
 						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['url']?></span></div>
 					</div>
 					<div class="form-group">
@@ -83,33 +79,20 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">推送时间</label>
-						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['create_time']?></span></div>
+						<div class="col-sm-4"><span class="line-s"><?php echo $data_info['update_time']?></span></div>
 					</div>
 			</fieldset>
             <input type="hidden" name="id" id="id" value="<?php echo $data_info['id']?>"/>
             <input type="hidden" name="push_status" id="push_status" value="<?php echo $data_info['push_status']?>"/>		
      </div>
-
+</div>
 </form>
 <script language="javascript" type="text/javascript">
 	var id = <?php echo $data_info['id']?>;
-	var edit= <?php echo $is_edit?"true":"false"?>;
+	var edit= <?php echo $is_browser?"true":"false"?>;
 	var folder_name = "<?php echo $folder_name?>";
 	require(['<?php echo SITE_URL?>scripts/common.js'], function (common) {	
-		require(['<?php echo SITE_URL?>scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/edit.js']);		
-		 require(['<?php echo SITE_URL?>scripts//jedate-6.5.0/dist/jedate.min.js'],function(jeDate) {
-		        jeDate("#send_time",{
-		        	theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
-		            format:"YYYY-MM-DD hh:mm:ss",
-		            isTime:true,
-		            isToday:true, 
-		            isClear:true, 
-		            minDate:"2014-09-19 00:00:00",
-		            donefun:function(obj) {
-                             $('#send_time').parent().parent().removeClass('has-error').addClass('has-success');
-			       },   
-		        }) 
-		    });
+        require(['<?php echo SITE_URL?>scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/edit.js']);				
 	});
 </script>
 <link rel="stylesheet" href="<?php echo SITE_URL?>scripts/jedate-6.5.0/skin/jedate.css">

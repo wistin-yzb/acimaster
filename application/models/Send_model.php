@@ -2,100 +2,13 @@
 class Send_model extends Base_Model {
 	var $page_size = 10;
 	
-	var $appid= 'wxcc25e743d871491c';
-	var $appsecret= 'cf25c60d878bbba24e1ef768908c2add';	
 	public function __construct() {
 		$this->db_tablepre = 't_sys_';
-		$this->table_name = 'send';
-		
-		
+		$this->table_name = 'send';		
 		parent::__construct ();
 	}
-	public function rows() {
-		return array (
-				array (
-						'name' => '这' 
-				),
-				array (
-						'name' => '是' 
-				),
-				array (
-						'name' => '一' 
-				),
-				array (
-						'name' => '个' 
-				),
-				array (
-						'name' => '演' 
-				),
-				array (
-						'name' => '示' 
-				),
-				array (
-						'name' => '模' 
-				),
-				array (
-						'name' => '块' 
-				) 
-		);
-	}
 	
-	#拉取一条数据
-	public function get_one_fun(){		
-		$where = "id = 1";//你要查询的条件
-		$field = "*";//你要显示的字段
-		$orderby = "id desc";//排序方式
-		$groupby = "";//GROUP
-		//从table1表中拉取 id=1的数据
-		$data_info = $this->Send_model->get_one($where , $field, $orderby, $groupby);
-		//如果拉取到了
-		if($data_info){
-			return $data_info;
-		}else{
-			return;
-		}
-	}
-		
-	#拉取多条数据
-	public function get_select_fun(){		
-		//从table1表中拉取多条数据		
-		$where = "id > 0 or temp_id >= 0";//你要查询的条件
-		$field = "temp_id,`send_time` as fieldTWO ";//你要显示的字段
-		$orderby = "id desc,temp_id asc";//排序方式
-		$groupby = "";//GROUP
-		//从table1表中拉取全部数据
-		$data_list = $this->Send_model->select($where , $field, $orderby, $groupby);
-		//如果拉取到了，这个结果是一个多维数组
-		if($data_list){
-			return $data_list;
-		}else{
-			return;
-		}
-	}
-	
-	#拉取多条数据带分页
-	public  function get_page_list(){
-		//从table1表中拉取多条数据		
-		$where = "id > 0 or temp_id >= 0";//你要查询的条件
-		$field = "temp_id,`send_time` as fieldTWO ";//你要显示的字段
-		$orderby = "temp_id desc,send_time asc";//排序方式
-		$groupby = "";//GROUP
-		$page_no = 1;
-		$page_size = 10;//一页显示10条数据
-		$page_url_format = page_list_url('adminpanel/send/index',true);
-
-		//从table1表中拉取全部数据
-		$data_list = $this->Send_model->listinfo($where , $field, $orderby,$page_no,$page_size, $groupby,$page_url_format);
-
-		//如果拉取到了，这个结果是一个多维数组
-		if($data_list){
-			print_r($data_list);
-			echo $this->Send_model->pages;//打印分页控件
-		}else{
-			die("信息不存在");
-		}
-	}
-	
+	//default
 	function default_info(){
 		return array(
 				'id'=>0,
@@ -111,10 +24,11 @@ class Send_model extends Base_Model {
 				'remark'=>'',
 				'url'=>'',
 				'push_status'=>0,
+				'account_name'=>'',
 		);
 	}
 	
-	//入队
+	//inqueue
 	function inqueue($data,$opt_data){
 		if(empty($data))return false;
 		$redis = new redis();
@@ -133,7 +47,7 @@ class Send_model extends Base_Model {
 		}		
 	}
 	
-	//出队#!/usr/bin/php
+	//outqueue
 	function outqueue()
 	{
 		$redis = new redis();
@@ -202,16 +116,17 @@ class Send_model extends Base_Model {
 		return self::https_request($template_url,$post_json);
 	}
 	
-	//获取access_token
-	function get_access_token(){
-		$token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$this->appid.'&secret='.$this->appsecret;
+	//get:access_token
+	function get_access_token($appid,$appsecret){
+		if(!$appid||!$appsecret)return;
+		$token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
 		$access_token = @file_get_contents('access_token.txt');
 		$expire_time = @file_get_contents('expire_time.txt');
 		$template_id = "sUroer1rqkwvMVL4pQK2GYk4itRb_qLacN_FzAZ5i5E";
 		//get access_token
 		if(!$access_token||$expire_time<time()){ //过期重新获取
 			$json = $this->Send_model->https_request($token_url);
-			$arr = json_decode($json,true);
+			$arr = @json_decode($json,true);
 			if($arr['access_token']){
 				$access_token = $arr['access_token'];
 				//将创新获取的access_token存到txt
@@ -285,6 +200,15 @@ class Send_model extends Base_Model {
 		var_dump($json);
 		echo '</pre>';
 		file_put_contents('myopenid.txt', $json);
+	}
+	
+	//获取所有模板消息列表
+	function get_template_list($access_token){
+		if(!$access_token)return;
+		$url = "https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=$access_token";
+		$json = $this->https_request($url);
+		$ret   = json_decode($json,true);
+		return $ret;
 	}
 	
 	//远程post请求

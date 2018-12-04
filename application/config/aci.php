@@ -337,8 +337,53 @@ $config['aci_module'] = array (
       ),
     ),
   ),
-  'send' => 
-  array (
+	'service'=>array(
+		'version' => '1',
+		'charset' => 'utf-8',
+		'lastUpdate' => '2015-10-09 20:10:10',
+		'moduleName' => 'service',
+		'modulePath' => 'adminpanel',
+		'moduleCaption' => '微信服公众号',
+		'description' => '由autoCodeigniter 系统的模块',
+		'fileList' => NULL,
+		'works' => true,
+		'moduleUrl' => 'adminpanel/service',
+		'system' => false,
+		'coder' => '胡子锅',
+		'website' => 'http://',
+		'moduleDetails' =>
+		array (
+				0 =>
+				array (
+						'folder' => 'adminpanel',
+						'controller' => 'service',
+						'method' => 'index',
+						'caption' => '配置公众号',
+				),
+				1=>
+				array (
+						'folder' => 'adminpanel',
+						'controller' => 'service',
+						'method' => 'add',
+						'caption' => '公众号-新增',
+				),
+				2 =>
+				array (
+						'folder' => 'adminpanel',
+						'controller' => 'service',
+						'method' => 'edit',
+						'caption' => '公众号-修改',
+				),
+				3 =>
+				array (
+						'folder' => 'adminpanel',
+						'controller' => 'service',
+						'method' => 'delete',
+						'caption' => '公众号-删除',
+				),					
+		),
+	),
+  'send' => array (
     'version' => '1',
     'charset' => 'utf-8',
     'lastUpdate' => '2015-10-09 20:10:10',
@@ -354,57 +399,64 @@ $config['aci_module'] = array (
     'website' => 'http://',
     'moduleDetails' => 
     array (
-      0 => 
-      array (
-        'folder' => 'adminpanel',
-        'controller' => 'send',
-        'method' => 'index',
-        'caption' => '群发列表',
-      ),
-      1 => 
-      array (
-        'folder' => 'adminpanel',
-        'controller' => 'send',
-        'method' => 'add',
-        'caption' => '群发-添加',
-      ),
-      2 => 
-      array (
-        'folder' => 'adminpanel',
-        'controller' => 'send',
-        'method' => 'edit',
-        'caption' => '群发-修改',
-      ),
-      3 => 
-      array (
-        'folder' => 'adminpanel',
-        'controller' => 'send',
-        'method' => 'delete',
-        'caption' => '群发-删除',
-      ),
-      4 => 
-      array (
-        'folder' => 'adminpanel',
-        'controller' => 'send',
-        'method' => 'browser',
-        'caption' => '群发-查看',
-      ),   
-    		5 =>
-    		array (
+	      0 => 
+	      array (
+	        'folder' => 'adminpanel',
+	        'controller' => 'send',
+	        'method' => 'index',
+	        'caption' => '群发列表',
+	      ),
+	      1 => 
+	      array (
+	        'folder' => 'adminpanel',
+	        'controller' => 'send',
+	        'method' => 'add',
+	        'caption' => '群发-添加',
+	      ),
+	      2 => 
+	      array (
+	        'folder' => 'adminpanel',
+	        'controller' => 'send',
+	        'method' => 'edit',
+	        'caption' => '群发-修改',
+	      ),
+	      3 => 
+	      array (
+	        'folder' => 'adminpanel',
+	        'controller' => 'send',
+	        'method' => 'delete',
+	        'caption' => '群发-删除',
+	      ),
+	      4 => 
+	      array (
+	        'folder' => 'adminpanel',
+	        'controller' => 'send',
+	        'method' => 'browser',
+	        'caption' => '群发-查看',
+	      ),   
+	     5 =>
+	    array (
+	    	'folder' => 'adminpanel',
+	    	'controller' => 'send',
+	    	'method' => 'auth2',
+	    	'caption' => '群发-授权auth2',
+	    ),    
+	    6 =>
+	    array (
+	    	'folder' => 'adminpanel',
+	    	'controller' => 'send',
+	    	'method' => 'wechat_redirect',
+	    	'caption' => '群发-wechat_redirect',
+	     ),  
+    	7 =>
+    	array (
     				'folder' => 'adminpanel',
     				'controller' => 'send',
-    				'method' => 'auth2',
-    				'caption' => '群发-授权auth2',
-    		),    
-    		6 =>
-    		array (
-    				'folder' => 'adminpanel',
-    				'controller' => 'send',
-    				'method' => 'wechat_redirect',
-    				'caption' => '群发-wechat_redirect',
-    		),  
+    				'method' => 'get_template_list',
+    				'caption' => '群发-get_template_list',
+    	 ), 
     ),
-  ),
+  ),	
 );
 
 /* End of file aci.php */
