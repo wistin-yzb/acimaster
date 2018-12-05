@@ -41,10 +41,15 @@ class Send extends Admin_Controller {
 					'account_name'=>$_POST["account_name"],
 					'temp_id'=>$temp_id,
 					'first'=>$_POST["first"],
+					'key_field1'=>$_POST["key_field1"],
 					'keyword1'=>$_POST["keyword1"],
+					'key_field2'=>$_POST["key_field2"],
 					'keyword2'=>$_POST["keyword2"],
+					'key_field3'=>$_POST["key_field3"],
 					'keyword3'=>$_POST["keyword3"],
+					'key_field4'=>$_POST["key_field4"],
 					'keyword4'=>$_POST["keyword4"],
+					'key_field5'=>$_POST["key_field5"],
 					'keyword5'=>$_POST["keyword5"],
 					'invest_style'=>$_POST["invest_style"],
 					'invest_profit'=>$_POST["invest_profit"],
@@ -52,7 +57,7 @@ class Send extends Admin_Controller {
 					'url'=>$_POST["url"],
 					'push_status'=>$push_status,
 					'update_time'=>date('Y-m-d H:i:s'),
-			);
+			);			
 			$t_id = $this->Send_model->insert($opt_data);
 			if($t_id)
 			{
@@ -65,11 +70,11 @@ class Send extends Admin_Controller {
 				#加入任务队列
 				$appid = $service_info["app_id"];
 				$appsecret = $service_info["app_secret"];				
-				$access_token  =$this->Send_model->get_access_token($appid,$appsecret);
+				$access_token  =$this->Send_model->get_last_access_token($appid,$appsecret);
 				if($access_token!=-1&&!empty($access_token)){
-					//$user_list = $this->Send_model->get_subscribe_user_list($access_token);
+					$user_list = $this->Send_model->get_subscribe_user_list($access_token); //生产环境开启
 					//$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
-					$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
+					//$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
 					$opt_data['access_token'] = $access_token;
 					$inret = @$this->Send_model->inqueue($user_list,$opt_data);	
 					if($inret){
@@ -118,10 +123,15 @@ class Send extends Admin_Controller {
 					'account_name'=>$_POST["account_name"],
 					'temp_id'=>$temp_id,
 					'first'=>$_POST["first"],
+					'key_field1'=>$_POST["key_field1"],
 					'keyword1'=>$_POST["keyword1"],
+					'key_field2'=>$_POST["key_field2"],
 					'keyword2'=>$_POST["keyword2"],
+					'key_field3'=>$_POST["key_field3"],
 					'keyword3'=>$_POST["keyword3"],
+					'key_field4'=>$_POST["key_field4"],
 					'keyword4'=>$_POST["keyword4"],
+					'key_field5'=>$_POST["key_field5"],
 					'keyword5'=>$_POST["keyword5"],
 					'invest_style'=>$_POST["invest_style"],
 					'invest_profit'=>$_POST["invest_profit"],
@@ -143,11 +153,11 @@ class Send extends Admin_Controller {
 				#加入任务队列
 				$appid = $service_info["app_id"];
 				$appsecret = $service_info["app_secret"];
-				$access_token  =$this->Send_model->get_access_token($appid,$appsecret);
+				$access_token  =$this->Send_model->get_last_access_token($appid,$appsecret);
 				if($access_token!=-1&&!empty($access_token)){
-					//$user_list = $this->Send_model->get_subscribe_user_list($access_token);
+					$user_list = $this->Send_model->get_subscribe_user_list($access_token);//生产环境开启
 					//$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
-					$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
+					//$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
 					$opt_data['access_token'] = $access_token;
 					$inret = @$this->Send_model->inqueue($user_list,$opt_data);
 					if($inret){						
@@ -237,8 +247,12 @@ class Send extends Admin_Controller {
 		if(!$appid||!$appsecret){
 			exit(json_encode(-1));
 		}
-		$access_token  =$this->Send_model->get_access_token($appid,$appsecret);
+		$access_token  =$this->Send_model->get_last_access_token($appid,$appsecret);
 		$list = $this->Send_model->get_template_list($access_token);
-		echo json_encode($list['template_list']);exit();
+		if(@$list['template_list']){			
+			echo json_encode(@$list['template_list']);exit();
+		}else{
+			echo json_encode(-2);exit();
+		}
 	}
 }

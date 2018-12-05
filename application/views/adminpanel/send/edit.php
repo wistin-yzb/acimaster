@@ -5,6 +5,8 @@
 	.tipmsg{font-size:12px;height:33px;line-height:33px;background-color:whitesmoke;}
 	.edit_send_time{position:relative;top:.6rem;}
 	#template_number>.tps{padding: 0 20px 0 0;font-size: 14px;position: relative;top: 5px;height: 33px;line-height: 33px;}
+	.w174{width:174px;}
+	.keycon{position: relative;margin-top:-34px;margin-left: 180px;}
 </style>
 <form class="form-horizontal" role="form" id="validateform" name="validateform" action="<?php echo current_url()?>" >
 <div class='panel panel-default'>
@@ -51,7 +53,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">发送对象</label>
 						<div class="col-sm-4">
-						    <span class="line-s" style="font-size:9px;">当前公众号下关注的所有用户</span>
+						    <span class="line-s" style="font-size:12px;">当前公众号下关注的所有用户</span>
 						</div>
 					</div>
 					<div  class="form-group" style="font-size:16px;width:50%;height:33px;line-height:33px;background-color:honeydew;border:1px solid #eee;">
@@ -61,49 +63,54 @@
 					<div class="form-group">
 						<label  class="col-sm-2 control-label">开头first<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="120" />
+						  <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword1<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="keyword1" type="text" class="form-control" value="<?php echo $data_info['keyword1']?>" id="keyword1" placeholder="(必填)" size="120" />
+						 <input name="key_field1" type="text" class="form-control w174" value="<?php echo $data_info['key_field1']?>" id="key_field1" placeholder="关键词字段1(必填)" size="120" />
+						  <input name="keyword1" type="text" class="form-control keycon" value="<?php echo $data_info['keyword1']?>" id="keyword1" placeholder="关键词内容1(必填)" size="400" />
 						</div>
 					</div>
                     <div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword2<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="keyword2" type="text" class="form-control" value="<?php echo $data_info['keyword2']?>" id="keyword2" placeholder="(必填)" size="120" />
+						  <input name="key_field2" type="text" class="form-control w174" value="<?php echo $data_info['key_field2']?>" id="key_field2" placeholder="关键词字段2(必填)" size="120" />
+						  <input name="keyword2" type="text" class="form-control keycon" value="<?php echo $data_info['keyword2']?>" id="keyword2" placeholder="关键词内容2(必填)" size="400" />
 						</div>
 					</div> 
                    <div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword3<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="keyword3" type="text" class="form-control" value="<?php echo $data_info['keyword3']?>" id="keyword3" placeholder="(必填)" size="120" />
+						 <input name="key_field3" type="text" class="form-control w174" value="<?php echo $data_info['key_field3']?>" id="key_field3" placeholder="关键词字段3(必填)" size="120" />
+						  <input name="keyword3" type="text" class="form-control keycon" value="<?php echo $data_info['keyword3']?>" id="keyword3" placeholder="关键词内容3(必填)" size="400" />
 						</div>
 					</div>           
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword4</label>
 						<div class="col-sm-4">
-						  <input name="keyword4" type="text" class="form-control" value="<?php echo $data_info['keyword4']?>" id="keyword4" placeholder="" size="120" />
+						  <input name="key_field4" type="text" class="form-control w174" value="<?php echo $data_info['key_field4']?>" id="key_field4" placeholder="关键词字段4" size="120" />
+						  <input name="keyword4" type="text" class="form-control keycon" value="<?php echo $data_info['keyword4']?>" id="keyword4" placeholder="关键词内容4" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword5</label>
 						<div class="col-sm-4">
-						  <input name="keyword5" type="text" class="form-control" value="<?php echo $data_info['keyword5']?>" id="keyword5" placeholder="" size="120" />
+						 <input name="key_field5" type="text" class="form-control w174" value="<?php echo $data_info['key_field5']?>" id="key_field5" placeholder="关键词字段5" size="120" />
+						 <input name="keyword5" type="text" class="form-control keycon" value="<?php echo $data_info['keyword5']?>" id="keyword5" placeholder="关键词内容5" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间invest_style</label>
 						<div class="col-sm-4">
-						  <input name="invest_style" type="text" class="form-control"  value="<?php echo $data_info['invest_style']?>" id="invest_style" placeholder="" size="120" />
+						  <input name="invest_style" type="text" class="form-control"  value="<?php echo $data_info['invest_style']?>" id="invest_style" placeholder="" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间invest_profit</label>
 						<div class="col-sm-4">
-						  <input name="invest_profit" type="text" class="form-control" value="<?php echo $data_info['invest_profit']?>" id="invest_profit" placeholder="" size="120" />
+						  <input name="invest_profit" type="text" class="form-control" value="<?php echo $data_info['invest_profit']?>" id="invest_profit" placeholder="" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -115,7 +122,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">跳转链接url</label>
 						<div class="col-sm-4">
-						  <input name="url" type="text" class="form-control" value="<?php echo $data_info['url']?>" id="url" placeholder="" size="120" />
+						  <input name="url" type="text" class="form-control" value="<?php echo $data_info['url']?>" id="url" placeholder="" size="400" />
 						</div>
 					</div>
 			</fieldset>

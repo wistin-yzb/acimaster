@@ -31,9 +31,9 @@
                         <th>编号</th>
                         <th>公众号名称</th>
                         <th>模板编号</th>
-                        <th>keyword1</th>
-                        <th>keyword2</th>
-                        <th>keyword3</th>
+                        <th>关键词1</th>
+                        <th>关键词2</th>
+                        <th>关键词3</th>
                         <th>推送状态</th>
                         <th>更新时间</th>                        
                         <th>操作</th>

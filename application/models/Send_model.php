@@ -15,10 +15,15 @@ class Send_model extends Base_Model {
 				'temp_id'=>'',
 				'first'=>'',
 				'keyword1'=>'',
+				'key_field1'=>'',
 				'keyword2'=>'',
+				'key_field2'=>'',
 				'keyword3'=>'',
+				'key_field3'=>'',
 				'keyword4'=>'',
+				'key_field4'=>'',
 				'keyword5'=>'',
+				'key_field5'=>'',
 				'invest_style'=>'',
 				'invest_profit'=>'',
 				'remark'=>'',
@@ -116,27 +121,39 @@ class Send_model extends Base_Model {
 		return self::https_request($template_url,$post_json);
 	}
 	
-	//get:access_token
+	//get:access_token-废弃掉
 	function get_access_token($appid,$appsecret){
 		if(!$appid||!$appsecret)return;
 		$token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
 		$access_token = @file_get_contents('access_token.txt');
 		$expire_time = @file_get_contents('expire_time.txt');
-		$template_id = "sUroer1rqkwvMVL4pQK2GYk4itRb_qLacN_FzAZ5i5E";
 		//get access_token
 		if(!$access_token||$expire_time<time()){ //过期重新获取
-			$json = $this->Send_model->https_request($token_url);
+			$json = $this->https_request($token_url);		
 			$arr = @json_decode($json,true);
 			if($arr['access_token']){
 				$access_token = $arr['access_token'];
 				//将创新获取的access_token存到txt
 				file_put_contents('access_token.txt',$access_token);
-				file_put_contents('expire_time.txt',time()+7000);
+				file_put_contents('expire_time.txt',time()+3600);
 			}else{
 				return -1;
 			}
 		}
 		return $access_token;
+	}
+	
+	//get:last_access_token
+	function get_last_access_token($appid,$appsecret){
+		if(!$appid||!$appsecret)return;
+		$token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
+			$json = $this->https_request($token_url);
+			$arr = @json_decode($json,true);
+			if(@$arr['access_token']){
+				return $arr['access_token'];
+			}else{
+				return -1;
+			}
 	}
 	
 	//获取指定公众号的关注用户列表[5w以内]

@@ -9,7 +9,7 @@
 <div class='panel panel-default'>
 	<div class='panel-heading'>
 		<i class='icon-edit icon-large'></i>
-		<?php echo $is_edit?"修改":"新增"?>公众号配置信息
+		<?php echo $is_edit?"修改":"新增"?>公众号配置信息<br/><font color="red"><strong>强烈提醒</strong></font>：务必在微信平台设置当前<font color="red"><b>公众号ip白名单</b></font>，当前服务器ip：119.23.201.162，以及<font color="red"><b>添加该公众号对应的消息模板</b></font>，否则你将无法发送该公众号模板消息
 		<div class='panel-tools'>
 
 			<div class='btn-group'>
@@ -56,7 +56,7 @@
 						<label class="col-sm-2 control-label">备注</label>
 						<div class="col-sm-4">
 						  <textarea name="remark"  id="remark" class="form-control"   placeholder=""/><?php echo $data_info['remark']?></textarea>
-						</div>
+						</div>						
 					</div>           																		
 			</fieldset>
             <input type="hidden" name="id" id="id" value="<?php echo $data_info['id']?>"/>

@@ -37,60 +37,30 @@ function send_template_msg($openid){
      $post_arr = array(
 		"touser"=>$openid,
 		"template_id"=>$opt_json->temp_id,
-		"url"=>$opt_json->url,
-		/*"data"=>array(
-				"first"=>array(
-						"value"=>$opt_json->first,
-						"color"=>"#173177"
-				),						
-				"keyword1"=>array(
-						"value"=>$opt_json->keyword1,
-						"color"=>"#173177"
-				),
-				"keyword2"=>array(
-						"value"=>$opt_json->keyword2,
-						"color"=>"#173177"
-				),
-				"keyword3"=>array(
-						"value"=>$opt_json->keyword3,
-						"color"=>"#173177"
-				),
-				"keyword4"=>array(
-						"value"=>$opt_json->keyword4,
-						"color"=>"#173177"			
-				),
-				"keyword5"=>array(
-						"value"=>$opt_json->keyword4,
-						"color"=>"#173177"			
-				),
-				"remark"=>array(
-						"value"=>$opt_json->remark,
-						"color"=>"#173177"
-				),
-		),*/
+		"url"=>$opt_json->url,	
 		"data"=>array(
 				"first"=>array(
 						"value"=>$opt_json->first,
 						"color"=>"#727193"
 				),						
-				"showname"=>array(
+				"{$opt_json->key_field1}"=>array(
 						"value"=>$opt_json->keyword1,
 						"color"=>"#727193"
 				),
-				"ticket_qty"=>array(
+				"{$opt_json->key_field2}"=>array(
 						"value"=>$opt_json->keyword2,
 						"color"=>"#727193"
 				),
-				"showtime"=>array(
+				"{$opt_json->key_field3}"=>array(
 						"value"=>$opt_json->keyword3,
 						"color"=>"#727193"
 				),
-				"keyword4"=>array(
+				"{$opt_json->key_field4}"=>array(
 						"value"=>$opt_json->keyword4,
 						"color"=>"#727193"			
 				),
-				"keyword5"=>array(
-						"value"=>$opt_json->keyword4,
+				"{$opt_json->key_field5}"=>array(
+						"value"=>$opt_json->keyword5,
 						"color"=>"#727193"			
 				),
 				"remark"=>array(
@@ -104,13 +74,6 @@ function send_template_msg($openid){
 	 $ret = https_request($template_url,$post_json);		
 	 //file_put_contents('/usr/local/etc/outqueue-last.txt',$ret.PHP_EOL,FILE_APPEND);
 }
-
-function f5($str)
-{ 
-$result = array(); 
-preg_match_all("/(?:\{)(.*)(?:\})/i",$str, $result); 
-return $result[1][0]; 
-} 
 
 //remote-post
 function https_request($url,$data = NULL)

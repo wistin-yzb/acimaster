@@ -30,6 +30,14 @@ define(function (require) {
 					},	
 				}
 			},	
+			key_field1: {
+				message: '中间key_field1字段不能为空',
+				validators: {
+					notEmpty: {
+						message: '中间key_field1字段不能为空'
+					},	
+				}
+			},	
 			keyword2: {
 				message: '中间keyword2不能为空',
 				validators: {
@@ -38,11 +46,27 @@ define(function (require) {
 					},	
 				}
 			},	
+			key_field2: {
+				message: '中间key_field2字段不能为空',
+				validators: {
+					notEmpty: {
+						message: '中间key_field2字段不能为空'
+					},	
+				}
+			},	
 			keyword3: {
 				message: '中间keyword3不能为空',
 				validators: {
 					notEmpty: {
 						message: '中间keyword3不能为空'
+					},	
+				}
+			},	
+			key_field3: {
+				message: '中间key_field3字段不能为空',
+				validators: {
+					notEmpty: {
+						message: '中间key_field3字段不能为空'
 					},	
 				}
 			},	
@@ -72,6 +96,13 @@ define(function (require) {
 						}
 					}
 				},
+				key_field1: {
+					validators: {
+						notEmpty: {
+							message: '请输入中间key_field1内容'
+						}
+					}
+				},
 				keyword2: {
 					validators: {
 						notEmpty: {
@@ -79,6 +110,13 @@ define(function (require) {
 						}
 					}
 				},	
+				key_field2: {
+					validators: {
+						notEmpty: {
+							message: '请输入中间key_field2内容'
+						}
+					}
+				},
 				keyword3: {
 					validators: {
 						notEmpty: {
@@ -86,6 +124,13 @@ define(function (require) {
 						}
 					}
 				},		
+				key_field3: {
+					validators: {
+						notEmpty: {
+							message: '请输入中间key_field3内容'
+						}
+					}
+				},
 			}
 		};
 	}
@@ -132,18 +177,28 @@ define(function (require) {
 			  dataType: "JSON",
 			  data:params,
 			  success:function(result){		  
-				  console.log('----------------------log===');
-				  console.log(result);
-				  if(result.length<0)return false;
-				  $.each(result,function(index,item){
-					  html+='<span class="tps"><input  type="radio" name="temp_id" style="width:16px ;height:16px;" value="'+item.template_id+'"/>prid=>'+item.template_id+'</span>';
-					  html+='<span class="tps">title=>【'+item.title+'】</span>';
-					  html+='<span class="tps">content=>'+item.content+'</span>';
-					  html+='<span class="tps">example=>'+item.example+'</span>';
-				  });	              
-				  $('#template_number').html(html); 
+				  //console.log('----------------------log===');
+				  //console.log(result);
+				  if(result=='-1'){
+					  html+='无效参数';
+					  $('#template_number').html(html); 
+					  return false;
+				   }else{
+					      if(result=='-2'){
+					    	  html+='暂无模板列表,请先添加对应公众号消息模板以及设置公众号ip白名单,当前服务器ip:119.23.201.162';
+					      }else if(result=='null'){
+					    	  html+='请将当前服务器ip:119.23.201.162添加到对应公众号的ip白名单中';
+					      }else{
+							  $.each(result,function(index,item){
+								  html+='<span class="tps"><input  type="radio" name="temp_id" style="width:16px ;height:16px;" value="'+item.template_id+'"/>prid=>'+item.template_id+'</span>';
+								  html+='<span class="tps">title=>【'+item.title+'】</span>';
+								  html+='<span class="tps">content=>'+item.content+'</span>';
+								  html+='<span class="tps">example=>'+item.example+'</span>';
+							  });	    
+					      }
+					   $('#template_number').html(html); 
+				   }
 		    }});//===End
-		   $('#account_name').val($.trim(text)); 
-		   
+		   $('#account_name').val($.trim(text)); 		   
 	  })   
 });
