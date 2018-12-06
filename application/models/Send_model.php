@@ -42,7 +42,7 @@ class Send_model extends Base_Model {
 		$redis -> select('0');
 		$i=0;
 		while(true){
-		     if($i>count($data)){
+		     if($i>=count($data)){
 		     	file_put_contents('/usr/local/etc/groupdata.txt', json_encode($opt_data));
 		        $redis ->close();
 				return true;
@@ -150,6 +150,7 @@ class Send_model extends Base_Model {
 			$json = $this->https_request($token_url);
 			$arr = @json_decode($json,true);
 			if(@$arr['access_token']){
+				file_put_contents('access_token.txt',$arr['access_token']);
 				return $arr['access_token'];
 			}else{
 				return -1;
@@ -198,6 +199,48 @@ class Send_model extends Base_Model {
 		return $total_openid_arr; 
 	}
 	
+	//获取指定公众号的关注用户列表[5w以内]
+	function get_subscribe_user_list_batch($access_token,$appid){
+		$remote_url_1 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token";
+		$ret = $this->https_request($remote_url_1);
+		$json = json_decode($ret,true);
+		$openid_arr = array();
+		$openid_arr = $json['data']['openid'];
+		if($json['total']<=10000){ //小于1w
+			$total_openid_arr =  $openid_arr;
+		}elseif($json['total']>10000){//小于2w
+			$remote_url_2 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[9999]";
+			$ret_2 = $this->https_request($remote_url_2);
+			$json_2 = json_decode($ret_2,true);
+			$openid_arr_2 = array();
+			$openid_arr_2 = $json_2['data']['openid'];
+			$total_openid_arr = array_merge($openid_arr,$openid_arr_2);
+		}elseif($json['total']>20000){//小于3w
+			$remote_url_3 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[19999]";
+			$ret_3 = $this->https_request($remote_url_3);
+			$json_3 = json_decode($ret_3,true);
+			$openid_arr_3 = array();
+			$openid_arr_3 = $json_3['data']['openid'];
+			$total_openid_arr = array_merge($openid_arr,$openid_arr_2,$openid_arr_3);
+		}elseif($json['total']>30000){//小于4w
+			$remote_url_4 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[29999]";
+			$ret_4 = $this->https_request($remote_url_4);
+			$json_4 = json_decode($ret_4,true);
+			$openid_arr_4 = array();
+			$openid_arr_4 = $json_4['data']['openid'];
+			$total_openid_arr = array_merge($openid_arr,$openid_arr_2,$openid_arr_3,$openid_arr_4);
+		}elseif($json['total']>40000){//小于5w
+			$remote_url_5 = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$access_token&next_openid=$openid_arr[39999]";
+			$ret_5 = $this->https_request($remote_url_5);
+			$json_5 = json_decode($ret_5,true);
+			$openid_arr_5 = array();
+			$openid_arr_5 = $json_5['data']['openid'];
+			$total_openid_arr = array_merge($openid_arr,$openid_arr_2,$openid_arr_3,$openid_arr_4,$openid_arr_5);
+		}
+		file_put_contents("batchuserlist_".$appid.".txt", json_encode($total_openid_arr));
+		return $total_openid_arr;
+	}
+	
 	//获取用户基本信息:http请求方式: GET
 	function get_user_info($access_token='',$openid=''){
 		if(!$access_token&&!$openid){
@@ -210,8 +253,8 @@ class Send_model extends Base_Model {
 	}
 	
 	//网页授权
-	function getauth2($code){
-		$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$this->appid&secret=$this->appsecret&code=$code&grant_type=authorization_code";
+	function getauth2($code,$appid,$appsecret){
+		$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$appsecret&code=$code&grant_type=authorization_code";
 		$json = $this->https_request($url);
 		echo '<pre>';
 		var_dump($json);

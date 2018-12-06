@@ -9,10 +9,11 @@ if($list){
 	$i=0;
 	$len = $redis->lLen('groupsend');
 	while(true){
-		if($i>$len){		
+		if($i>=$len){		
 			$redis ->close();
 			file_put_contents('/usr/local/etc/outqueuecok.txt',1);
 			@unlink('/usr/local/etc/groupdata.txt');
+			exit();
 		}
 		$openid = $redis->lpop('groupsend');
 		if($openid){

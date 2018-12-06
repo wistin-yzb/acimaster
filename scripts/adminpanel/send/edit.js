@@ -202,3 +202,50 @@ define(function (require) {
 		   $('#account_name').val($.trim(text)); 		   
 	  })   
 });
+//测试发送单个用户
+function testSend(){
+	var service_id = $.trim($('#service_id').val());
+	var temp_id  = $.trim($("input[name='temp_id']:checked").val());
+	var first = $.trim($('#first').val());
+	
+	var key_field1 = $.trim($('#key_field1').val());
+	var keyword1 = $.trim($('#keyword1').val());
+	
+	var key_field2 = $.trim($('#key_field2').val());
+	var keyword2 = $.trim($('#keyword2').val());
+	
+	var key_field3 = $.trim($('#key_field3').val());
+	var keyword3 = $.trim($('#keyword3').val());
+	
+	var account_name = $.trim($('#account_name').val());
+	var key_field4 = $.trim($('#key_field4').val());
+	var keyword4 = $.trim($('#keyword4').val());	
+	var key_field5 = $.trim($('#key_field5').val());
+	var keyword5 = $.trim($('#keyword5').val());
+	var invest_style = $.trim($('#invest_style').val());
+	var invest_profit = $.trim($('#invest_profit').val());
+	var remark = $.trim($('#remark').val());
+	var url = $.trim($('#url').val());
+	
+	var test_openid = $.trim($('#test_openid').val());
+	var params = {"test_openid":test_openid,"service_id":service_id,"temp_id":temp_id,"first":first,
+			                       "key_field1":key_field1,"keyword1":keyword1,"key_field2":key_field2,"keyword2":keyword2,"key_field3":key_field3,
+			                       "keyword3":keyword3,"account_name":account_name,"key_field4":key_field4,"keyword4":keyword4,"key_field5":key_field5,
+			                       "keyword5":keyword5,"invest_style":invest_style,"invest_profit":invest_profit,"remark":remark,"url":url
+			                       };	
+	console.log(params);
+	  $.ajax({
+		  url:"/adminpanel/send/test_send",
+		  type:"POST",
+		  dataType: "JSON",
+		  data:params,
+		  success:function(result){
+			   console.log(result);
+			   if(result.status=='true'){
+				   alert(result.tips);
+			   }else{
+				   alert(result.tips);
+			   }
+		  }
+	  });	
+}

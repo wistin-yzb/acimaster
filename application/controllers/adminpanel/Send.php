@@ -186,6 +186,129 @@ class Send extends Admin_Controller {
 		}
 	}
 	
+	//测试发送
+	function test_send(){		
+		$service_id = isset($_POST["service_id"])?trim(safe_replace($_POST["service_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
+		if($service_id==0)exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
+		
+		$temp_id = isset($_POST["temp_id"])?trim(safe_replace($_POST["temp_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择模板编号')));
+		if($temp_id=='')exit(json_encode(array('status'=>false,'tips'=>'请选择模板编号')));
+		
+		$first = isset($_POST["first"])?trim(safe_replace($_POST["first"])):exit(json_encode(array('status'=>false,'tips'=>'请填写开头first内容')));
+		if($first=='')exit(json_encode(array('status'=>false,'tips'=>'请填写开头first内容')));
+		
+		$key_field1 = isset($_POST["key_field1"])?trim(safe_replace($_POST["key_field1"])):exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词字段1')));
+		if($key_field1=='')exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词字段1')));
+		
+		$keyword1 = isset($_POST["keyword1"])?trim(safe_replace($_POST["keyword1"])):exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词内容1')));
+		if($keyword1=='')exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词内容1')));
+		
+		$key_field2 = isset($_POST["key_field2"])?trim(safe_replace($_POST["key_field2"])):exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词字段2')));
+		if($key_field2=='')exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词字段2')));
+		
+		$keyword2 = isset($_POST["keyword2"])?trim(safe_replace($_POST["keyword2"])):exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词内容2')));
+		if($keyword2=='')exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词内容2')));
+		
+		$key_field3 = isset($_POST["key_field3"])?trim(safe_replace($_POST["key_field3"])):exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词字段3')));
+		if($key_field3=='')exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词字段3')));
+		
+		$keyword3 = isset($_POST["keyword3"])?trim(safe_replace($_POST["keyword3"])):exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词内容3')));
+		if($keyword3=='')exit(json_encode(array('status'=>false,'tips'=>'请填写中间关键词内容3')));
+		
+		$test_openid = isset($_POST["test_openid"])?trim(safe_replace($_POST["test_openid"])):exit(json_encode(array('status'=>false,'tips'=>'请填写测试用户openid')));
+		if($test_openid=='')exit(json_encode(array('status'=>false,'tips'=>'请填写测试用户openid')));
+		
+		$push_status = 1;//推送状态,1成功,0失败
+		$opt_data = array(
+				'service_id'=>$service_id,
+				'account_name'=>$_POST["account_name"],
+				'temp_id'=>$temp_id,
+				'first'=>$first,
+				'key_field1'=>$key_field1,
+				'keyword1'=>$keyword1,
+				'key_field2'=>$key_field2,
+				'keyword2'=>$keyword2,
+				'key_field3'=>$key_field3,
+				'keyword3'=>$keyword3,
+				'key_field4'=>$_POST["key_field4"],
+				'keyword4'=>$_POST["keyword4"],
+				'key_field5'=>$_POST["key_field5"],
+				'keyword5'=>$_POST["keyword5"],
+				'invest_style'=>$_POST["invest_style"],
+				'invest_profit'=>$_POST["invest_profit"],
+				'remark'=>$_POST["remark"],
+				'url'=>$_POST["url"],
+				'push_status'=>$push_status,
+				'update_time'=>date('Y-m-d H:i:s'),
+		);
+		//获取当前公众号配置信息
+		$where = "id={$service_id}";//你要查询的条件
+		$field = "app_id,app_secret";
+		$orderby = "";
+		$groupby = "";
+		$service_info = $this->Service_model-> get_one($where, '*', $orderby,$groupby);
+		#加入任务队列
+		$appid = $service_info["app_id"];
+		$appsecret = $service_info["app_secret"];
+		$access_token  =$this->Send_model->get_last_access_token($appid,$appsecret);
+		if($access_token!=-1&&!empty($access_token)){
+			$user_list = array($test_openid); //测试用户openid
+			$opt_data['access_token'] = $access_token;
+			$inret = @$this->Send_model->inqueue($user_list,$opt_data);
+			if($inret){
+				exit(json_encode(array('status'=>true,'tips'=>'测试发送成功')));
+			}else{
+				exit(json_encode(array('status'=>false,'tips'=>'测试发送失败')));
+			}
+		}		
+	}
+	
+	//指定公众号一键同步用户
+	function batchuserinfo($appid="wxcc25e743d871491c",$appsecret="cf25c60d878bbba24e1ef768908c2add"){			
+		$access_token  =$this->Send_model->get_last_access_token($appid,$appsecret);
+		$batch_file = file_get_contents("batchuserlist_".$appid.".txt");
+
+		if($batch_file){
+			$user_list =$batch_file;
+		}else{
+			$user_list = $this->Send_model->get_subscribe_user_list_batch($access_token,$appid);
+		}	
+		$user_list = json_decode($user_list);
+			 		
+		$user_all_list = array();
+		if($user_list){
+			foreach ($user_list as $key=>$val){	
+				$user_all_list[$key]['language'] = "zh_CN";
+				$user_all_list[$key]['openid'] = $val;
+			}
+		}
+		
+		//微信批量拉取用户信息
+		$totalnum = count($user_all_list);
+		$limitsize = 100;
+		//$page = ceil($totalnum/$limitsize);
+		$page = 5;	
+		$i=0;
+		$user_info_list = array();
+		
+		while ($i<$page){
+			$offset = $i*$limitsize;//偏移量
+			$url = "https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=$access_token";
+			$post_data = array("user_list"=>array_splice($user_all_list,$offset,$limitsize));
+			$post_json = json_encode($post_data);		
+			$ret = $this->Send_model->https_request($url,$post_json);		
+			//$arr = json_decode($ret,true);					
+		        echo '<pre>';
+			var_dump($ret);exit;
+			echo '</pre>';		
+			$i++;
+		}
+		
+		echo '<pre>';
+		var_dump($user_info_list);exit;
+		echo '</pre>';		
+	}
+	
 	/**
 	 * 查看明细
 	 * @param get id
@@ -202,19 +325,18 @@ class Send extends Admin_Controller {
 	}
 	
 	//weixin-redirect_url
-	function wechat_redirect(){
-		$APPID = "wxcc25e743d871491c";
+	function wechat_redirect($APPID='wxcc25e743d871491c'){
 		$REDIRECT_URI = "http://send.eatuo.com/adminpanel/send/auth2";
 		$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$APPID&redirect_uri=$REDIRECT_URI&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 		header("location:$url");exit;
 	}
 	
 	//auth2.0授权
-	function auth2(){
+	function auth2($appid='wxcc25e743d871491c',$appsecret='cf25c60d878bbba24e1ef768908c2add'){
 		if(!$_GET['code']){
 			exit('invalid code');
 		}
-		$this->Send_model->getauth2($_GET['code']);
+		$this->Send_model->getauth2($_GET['code'],$appid,$appsecret);
 	}
 	
 	/**

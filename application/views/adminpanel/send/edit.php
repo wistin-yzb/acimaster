@@ -9,7 +9,7 @@
 	.keycon{position: relative;margin-top:-34px;margin-left: 180px;}
 </style>
 <form class="form-horizontal" role="form" id="validateform" name="validateform" action="<?php echo current_url()?>" >
-<div class='panel panel-default'>
+<div class='panel panel-default' style="margin-bottom:130px;">
 	<div class='panel-heading'>
 		<i class='icon-edit icon-large'></i>
 		<?php echo $is_edit?"修改":"新增"?>群发模板消息
@@ -53,7 +53,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">发送对象</label>
 						<div class="col-sm-4">
-						    <span class="line-s" style="font-size:12px;">当前公众号下关注的所有用户</span>
+						    <span class="line-s" style="font-size:12px;">当前公众号下关注的所有用户</span>						    
 						</div>
 					</div>
 					<div  class="form-group" style="font-size:16px;width:50%;height:33px;line-height:33px;background-color:honeydew;border:1px solid #eee;">
@@ -130,7 +130,9 @@
             <input type="hidden" name="push_status" id="push_status" value="<?php echo $data_info['push_status']?>"/>
             <input type="hidden" name="account_name" id="account_name" value="<?php echo $data_info['account_name']?>"/>
 		<div class='form-actions'>
-		<?php aci_ui_button($folder_name,'send','edit',' type="submit" id="dosubmit" class="btn btn-primary " ','立即推送')?>
+		         <?php aci_ui_button($folder_name,'send','edit',' type="submit" id="dosubmit" class="btn btn-primary " ','立即推送')?>
+		         <span style="margin-left:178px;padding-right:10px;"><input type="text" id="test_openid" style="width:380px;" placeholder="请输入测试用户openid"></span>
+		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()">测试发送</a></span>
 		</div>
      </div>
   </div>
