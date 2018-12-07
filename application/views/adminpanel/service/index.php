@@ -29,10 +29,10 @@
                     <tr>
                         <th>#</th>
                         <th>编号</th>
+                        <th>账号名称</th>
                         <th>微信账号</th>
                         <th>应用appId</th>
-                        <th>应用appSecret</th>
-                        <th>账号名称</th>
+                        <th>应用appSecret</th>                        
                         <th>备注</th>
                         <th>使用状态</th>
                         <th>更新时间</th>                        
@@ -44,10 +44,11 @@
                         <tr>
                             <td><input type="checkbox" name="pid[]" value="<?php echo $v['id'] ?>"/></td>
                             <td><?php echo $v['id'] ?></td>
-                            <td><i><?php echo $v['wx_number'] ?></i></td>
+                              <td><?php echo $v['account_name'] ?></td>
+                            <td><i><?php echo $v['wx_number'] ?></i>&nbsp;&nbsp;<a class="btn btn-info btn-xs" onclick="batchuserinfo('<?php echo $v['app_id'] ?>','<?php echo $v['app_secret'] ?>')">一键同步用户</a>
+                            &nbsp;&nbsp;<a class="btn btn-info  btn-xs" onclick="viewuserinfo('<?php echo $v['app_id'] ?>')">查看用户列表</a></td>
                             <td><?php echo $v['app_id'] ?></td>
-                            <td><?php echo $v['app_secret'] ?></td>
-                            <td><?php echo $v['account_name'] ?></td>
+                            <td><?php echo $v['app_secret'] ?></td>                          
                             <td><?php echo $v['remark'] ?></td>
                               <td>
                             <?php if($v['status']==1): ?>

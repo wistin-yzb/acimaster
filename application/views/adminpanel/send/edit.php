@@ -132,7 +132,8 @@
 		<div class='form-actions'>
 		         <?php aci_ui_button($folder_name,'send','edit',' type="submit" id="dosubmit" class="btn btn-primary " ','立即推送')?>
 		         <span style="margin-left:178px;padding-right:10px;"><input type="text" id="test_openid" style="width:380px;" placeholder="请输入测试用户openid"></span>
-		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()">测试发送</a></span>
+		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()">测试发送</a></span><br/>
+		         <span style="margin-left:262px;font-size:9px;">测试用户openid请到<font color="red">配置公众号</font>栏目&gt;<font color="red">查看用户列表</font>,自己搜索获取即可.如遇无法操作问题,请联系系统管理人员</span>
 		</div>
      </div>
   </div>

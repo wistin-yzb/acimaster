@@ -22,3 +22,24 @@ define(function (require) {
 		}
 	});
 });
+//一键同步用户
+function batchuserinfo(appid,appsecret){
+	 $.ajax({
+		  url:"/adminpanel/send/batchuserinfo",
+		  type:"POST",
+		  dataType: "JSON",
+		  data:{"appid":appid,"appsecret":appsecret},
+		  success:function(result){
+			   console.log(result);
+			   if(result.status=='true'){
+				   alert(result.tips);
+			   }else{
+				   alert(result.tips);
+			   }
+		  }
+	  });	
+}
+//查看用户列表
+function viewuserinfo(appid){
+  location.href = "/adminpanel/send/userlist?appid="+appid;
+}

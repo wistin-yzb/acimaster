@@ -1,9 +1,9 @@
 <?php
 class Send extends Admin_Controller {
-	function __construct() {
+	function __construct() {	
 		parent::__construct ();
 		$this->load->model ( array (
-				'Send_model' ,'Service_model' ,
+				'Send_model' ,'Service_model' ,'Userlist_model' ,
 		) );
 	}
 	function index($page_no=1) {
@@ -17,7 +17,7 @@ class Send extends Admin_Controller {
 			
 		}
 		$where = implode(" and ",$where_arr);
-		$data_list = $this->Send_model->listinfo($where,'*',$orderby , $page_no, $this->Send_model->page_size,'',$this->Send_model->page_size,page_list_url('adminpanel/send/index',true));
+		$data_list = $this->Send_model->listinfo($where,'*',$orderby , $page_no, $this->Send_model->page_size,'',$this->Send_model->page_size,page_list_url('adminpanel/send/index',true));		
 		$this->view('index',array('data_list'=>$data_list,'pages'=>$this->Send_model->pages,'keyword'=>$keyword,'require_js'=>true));
 	}
 	
@@ -30,6 +30,19 @@ class Send extends Admin_Controller {
 		//如果是AJAX请求
 		if($this->input->is_ajax_request())
 		{
+			//核查异步操作是否完成
+			$redis = new redis();
+			$redis_con = $redis->connect('127.0.0.1',6379);
+			if(!$redis_con){
+				exit(json_encode(array('status'=>false,'tips'=>'redis-server服务连接失败')));
+			}	
+			$redis->auth('admin888');
+			$redis -> select('0');
+			$list = $redis->lrange('groupsend',0,-1);
+			if($list){
+				exit(json_encode(array('status'=>false,'tips'=>'请等待上次异步操作完成后再次操作')));
+			}
+			
 			//接收POST参数
 			$service_id = isset($_POST["service_id"])?trim(safe_replace($_POST["service_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
 			if($service_id==0)exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
@@ -113,6 +126,19 @@ class Send extends Admin_Controller {
 		//如果是AJAX请求
 		if($this->input->is_ajax_request())
 		{
+			//核查异步操作是否完成			
+			$redis = new redis();
+			$redis_con = $redis->connect('127.0.0.1',6379);
+			if(!$redis_con){
+				exit(json_encode(array('status'=>false,'tips'=>'redis-server服务连接失败')));
+			}	
+			$redis->auth('admin888');
+			$redis -> select('0');	
+			$list = $redis->lrange('groupsend',0,-1);
+			if($list){
+				exit(json_encode(array('status'=>false,'tips'=>'请等待上次异步操作完成后再次操作')));
+			}
+			
 			$service_id = isset($_POST["service_id"])?trim(safe_replace($_POST["service_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
 			if($service_id==0)exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
 			$temp_id = isset($_POST["temp_id"])?trim(safe_replace($_POST["temp_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择模板编号')));
@@ -188,6 +214,19 @@ class Send extends Admin_Controller {
 	
 	//测试发送
 	function test_send(){		
+		//核查异步操作是否完成
+		$redis = new redis();
+		$redis_con = $redis->connect('127.0.0.1',6379);
+		if(!$redis_con){
+			exit(json_encode(array('status'=>false,'tips'=>'redis-server服务连接失败')));
+		}	
+		$redis->auth('admin888');
+		$redis -> select('0');
+		$list = $redis->lrange('groupsend',0,-1);
+		if($list){
+			exit(json_encode(array('status'=>false,'tips'=>'请等待上次异步操作完成后再次操作')));
+		}
+		
 		$service_id = isset($_POST["service_id"])?trim(safe_replace($_POST["service_id"])):exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
 		if($service_id==0)exit(json_encode(array('status'=>false,'tips'=>'请选择公众号')));
 		
@@ -264,51 +303,111 @@ class Send extends Admin_Controller {
 	}
 	
 	//指定公众号一键同步用户
-	function batchuserinfo($appid="wxcc25e743d871491c",$appsecret="cf25c60d878bbba24e1ef768908c2add"){			
+	function batchuserinfo(){		
+		$appid = @$_POST['appid'];
+		$appsecret = @$_POST['appsecret'];
+		if(!$appid||!$appsecret){
+			exit(json_encode(array('status'=>false,'tips'=>'缺少参数')));
+		}
+		//核查上次同步是否完成
+		//redis-connect
+		$redis = new redis();
+		$redis_con = $redis->connect('127.0.0.1',6379);
+		if(!$redis_con){
+			exit(json_encode(array('status'=>false,'tips'=>'redis-server服务连接失败')));
+		}				
+		$redis->auth('admin888');
+		$redis -> select('1');		
+		$batchappid = $redis->lrange('batchappid',0,-1);
+		if(!empty($batchappid[0])){
+			exit(json_encode(array('status'=>false,'tips'=>'请等待上次异步操作完成后再次操作!')));
+		}
+		
 		$access_token  =$this->Send_model->get_last_access_token($appid,$appsecret);
-		$batch_file = file_get_contents("batchuserlist_".$appid.".txt");
+		$batch_file = @file_get_contents("batchuserlist_".$appid.".txt");
 
 		if($batch_file){
 			$user_list =$batch_file;
+			$user_list = json_decode($user_list);
 		}else{
-			$user_list = $this->Send_model->get_subscribe_user_list_batch($access_token,$appid);
+			$user_list = $this->Send_model->get_subscribe_user_list_batch($access_token,$appid);			
 		}	
-		$user_list = json_decode($user_list);
-			 		
-		$user_all_list = array();
-		if($user_list){
-			foreach ($user_list as $key=>$val){	
-				$user_all_list[$key]['language'] = "zh_CN";
-				$user_all_list[$key]['openid'] = $val;
-			}
-		}
 		
-		//微信批量拉取用户信息
-		$totalnum = count($user_all_list);
-		$limitsize = 100;
-		//$page = ceil($totalnum/$limitsize);
-		$page = 5;	
+		//加入队列		
 		$i=0;
-		$user_info_list = array();
-		
-		while ($i<$page){
-			$offset = $i*$limitsize;//偏移量
-			$url = "https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=$access_token";
-			$post_data = array("user_list"=>array_splice($user_all_list,$offset,$limitsize));
-			$post_json = json_encode($post_data);		
-			$ret = $this->Send_model->https_request($url,$post_json);		
-			//$arr = json_decode($ret,true);					
-		        echo '<pre>';
-			var_dump($ret);exit;
-			echo '</pre>';		
-			$i++;
-		}
-		
-		echo '<pre>';
-		var_dump($user_info_list);exit;
-		echo '</pre>';		
+		$redis->rpush('batchtoken',$access_token);
+		$redis->rpush('batchappid',$appid);
+		while (true){
+			if($i>=count($user_list)){			
+					$redis ->close();
+					break;
+				}					
+				$str = str_replace('"', '', $user_list[$i]);
+				$redis->rpush('batchdata',$str);
+				$i++;
+	      }
+	      //创建指定数据表
+	      $createtable_url = "http://{$_SERVER['SERVER_NAME']}/createtable.php?appid=$appid"; 
+	      $result = $this->Send_model->https_request($createtable_url);
+	      exit(json_encode(array('status'=>true,'tips'=>'一键同步该公众号下的用户成功')));
+		#==End
 	}
 	
+	//批量入库处理
+	function batchinsert($postdata=''){
+		if(!$postdata)return ;
+		$arr = array(
+				'subscribe'=>$postdata->subscribe,
+				'openid'=>$postdata->openid,
+				'nickname'=>$postdata->nickname,
+				'sex'=>$postdata->sex,
+				'language'=>$postdata->language,
+				'city'=>$postdata->city,
+				'province'=>$postdata->province,
+				'country'=>$postdata->country,
+				'headimgurl'=>$postdata->headimgurl,
+				'subscribe_time'=>$postdata->subscribe_time,
+				'remark'=>$postdata->remark
+		);
+		file_put_contents('batchinsertjson.txt',json_encode($arr).PHP_EOL,FILE_APPEND);
+		return $this->db->insert('t_sys_users',$arr);
+	}
+	
+     //获取用户列表
+	function userlist($page_no=1){
+		$appid = $_GET['appid'];
+		if(!$appid){
+			exit(json_encode('invalid request'));
+		}
+		$where = "app_id='{$appid}'";//你要查询的条件
+		$field = "app_id,app_secret,account_name,wx_number";
+		$orderby = "";
+		$groupby = "";
+		$service_info = $this->Service_model-> get_one($where, '*', $orderby,$groupby);
+		
+     	$page_no = max(intval($page_no),1);
+     	$where_arr = array();
+     	$orderby = "user_id desc";
+     	$keyword="";
+     	if (isset($_GET['dosubmit'])) {
+     		$keyword =isset($_GET['keyword'])?safe_replace(trim($_GET['keyword'])):'';
+     		if($keyword!="") $where_arr[] = "concat(openid,nickname,city,province,country,remark,user_id) like '%{$keyword}%'";     		
+     	}
+     	$where = implode(" and ",$where_arr);	
+     	$data_list = $this->Userlist_model->listinfo($where,'*',$orderby , $page_no, $this->Userlist_model->page_size,'',$this->Userlist_model->page_size,page_list_url('adminpanel/send/userlist',true));
+
+     	if($data_list){
+     		foreach ($data_list as $key=>$val){
+     			$data_list[$key]['subscribe_time'] = date('Y-m-d H:i:s',$val['subscribe_time']);
+     			$data_list[$key]['remark'] = $val['remark']?$val['remark']:'-';
+     			$data_list[$key]['country'] = $val['country']?$val['country']:'-';
+     			$data_list[$key]['province'] = $val['province']?$val['province']:'-';
+     			$data_list[$key]['city'] = $val['city']?$val['city']:'-';
+     		}
+     	}
+     	$this->view('userlist',array('data_list'=>$data_list,'service_info'=>$service_info,'appid'=>$appid,'pages'=>$this->Userlist_model->pages,'keyword'=>$keyword,'require_js'=>true));
+     }
+     
 	/**
 	 * 查看明细
 	 * @param get id

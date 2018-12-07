@@ -450,26 +450,39 @@ $config['aci_module'] = array (
 	     ),  
     	7 =>
     	array (
-    				'folder' => 'adminpanel',
-    				'controller' => 'send',
-    				'method' => 'get_template_list',
-    				'caption' => '群发-get_template_list',
+		'folder' => 'adminpanel',
+		'controller' => 'send',
+		'method' => 'get_template_list',
+		'caption' => '群发-get_template_list',
     	 ), 
-    		8 =>
+	8 =>
+	array (
+		'folder' => 'adminpanel',
+		'controller' => 'send',
+		'method' => 'batchuserinfo',
+		'caption' => '群发-batchuserinfo',
+	), 
+	9 =>
+	array (
+		'folder' => 'adminpanel',
+		'controller' => 'send',
+		'method' => 'test_send',
+		'caption' => '群发-test_send',
+	), 
+	10 =>
+	array (
+		'folder' => 'adminpanel',
+		'controller' => 'send',
+		'method' => 'batchinsert',
+		'caption' => '群发-batchinsert',
+	), 
+    		10 =>
     		array (
     				'folder' => 'adminpanel',
     				'controller' => 'send',
-    				'method' => 'batchuserinfo',
-    				'caption' => '群发-batchuserinfo',
+    				'method' => 'userlist',
+    				'caption' => '群发-userlist',
     		), 
-    		9 =>
-    		array (
-    				'folder' => 'adminpanel',
-    				'controller' => 'send',
-    				'method' => 'test_send',
-    				'caption' => '群发-test_send',
-    		), 
-    		
     ),
   ),	
 );
