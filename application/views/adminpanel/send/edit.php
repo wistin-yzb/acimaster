@@ -5,8 +5,8 @@
 	.tipmsg{font-size:12px;height:33px;line-height:33px;background-color:whitesmoke;}
 	.edit_send_time{position:relative;top:.6rem;}
 	#template_number>.tps{padding: 0 20px 0 0;font-size: 14px;position: relative;top: 5px;height: 33px;line-height: 33px;}
-	.w174{width:174px;}
-	.keycon{position: relative;margin-top:-34px;margin-left: 180px;}
+	.w174{width:200px;}
+	.keycon{position: relative;margin-top:-34px;margin-left: 210px;}
 </style>
 <form class="form-horizontal" role="form" id="validateform" name="validateform" action="<?php echo current_url()?>" >
 <div class='panel panel-default' style="margin-bottom:130px;">
@@ -22,9 +22,9 @@
 	</div>
 	<div class='panel-body'>
 		<fieldset>
-				<legend class="tipmsg">提示：要求账号为服务号并认证，对所有用户发送时需准守微信公众平台行为规范。PRID：sUroer1rqkwvMVL4pQK2GYk4itRb_qLacN_FzAZ5i5E</legend>
+				<legend class="tipmsg">&nbsp;<i class="fa fa-volume-up"></i>&nbsp;提示：要求账号为服务号并认证，对所有用户发送时需准守微信公众平台行为规范。PRID：sUroer1rqkwvMVL4pQK2GYk4itRb_qLacN_FzAZ5i5E</legend>
 				  <!--/.diy style-->
-				  <legend style="font-size:12px;">
+				  <legend style="font-size:12px;padding-bottom:20px;">
 				  模板消息仅用于公众号向用户发送重要的服务通知，只能用于符合其要求的服务场景中，如信用卡刷卡通知，商品购买成功通知等。不支持广告等营销类消息以及其它所有可能对用户造成骚扰的消息。<br/>
                  <br/>
                   关于使用规则，请注意：<br/>
@@ -33,7 +33,7 @@
                   3、在所选择行业的模板库中选用已有的模板进行调用；<br/>
                   4、每个账号可以同时使用25个模板。<br/>
                   5、<font color="red">当前每个账号的模板消息的日调用上限为10万次</font>，单个模板没有特殊限制。【2014年11月18日将接口调用频率从默认的日1万次提升为日10万次，可在MP登录后的开发者中心查看】。当账号粉丝数超过10W/100W/1000W时，模板消息的日调用上限会相应提升，以公众号MP后台开发者中心页面中标明的数字为准。
-                          <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277" target="_blank"><font color="blue">文档详情</font>&gt;&gt;</a>  
+                          <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277" target="_blank"><font color="blue">文档详情</font>&nbsp;<i class="fa fa-angle-double-right"></i></a>  
                   </legend>                        
                      <div class="form-group">
 						<label class="col-sm-2 control-label">公众号<font color="red">*</font></label>
@@ -69,35 +69,35 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword1<font color="red">*</font></label>
 						<div class="col-sm-4">
-						 <input name="key_field1" type="text" class="form-control w174" value="<?php echo $data_info['key_field1']?>" id="key_field1" placeholder="关键词字段1(必填)" size="120" />
+						 <input name="key_field1" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field1']?>" id="key_field1" placeholder="关键词英文字段1(必填)" size="120" />
 						  <input name="keyword1" type="text" class="form-control keycon" value="<?php echo $data_info['keyword1']?>" id="keyword1" placeholder="关键词内容1(必填)" size="400" />
 						</div>
 					</div>
                     <div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword2<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="key_field2" type="text" class="form-control w174" value="<?php echo $data_info['key_field2']?>" id="key_field2" placeholder="关键词字段2(必填)" size="120" />
+						  <input name="key_field2" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field2']?>" id="key_field2" placeholder="关键词英文字段2(必填)" size="120" />
 						  <input name="keyword2" type="text" class="form-control keycon" value="<?php echo $data_info['keyword2']?>" id="keyword2" placeholder="关键词内容2(必填)" size="400" />
 						</div>
 					</div> 
                    <div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword3<font color="red">*</font></label>
 						<div class="col-sm-4">
-						 <input name="key_field3" type="text" class="form-control w174" value="<?php echo $data_info['key_field3']?>" id="key_field3" placeholder="关键词字段3(必填)" size="120" />
+						 <input name="key_field3" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field3']?>" id="key_field3" placeholder="关键词英文字段3(必填)" size="120" />
 						  <input name="keyword3" type="text" class="form-control keycon" value="<?php echo $data_info['keyword3']?>" id="keyword3" placeholder="关键词内容3(必填)" size="400" />
 						</div>
 					</div>           
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword4</label>
 						<div class="col-sm-4">
-						  <input name="key_field4" type="text" class="form-control w174" value="<?php echo $data_info['key_field4']?>" id="key_field4" placeholder="关键词字段4" size="120" />
+						  <input name="key_field4" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field4']?>" id="key_field4" placeholder="关键词英文字段4" size="120" />
 						  <input name="keyword4" type="text" class="form-control keycon" value="<?php echo $data_info['keyword4']?>" id="keyword4" placeholder="关键词内容4" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间keyword5</label>
 						<div class="col-sm-4">
-						 <input name="key_field5" type="text" class="form-control w174" value="<?php echo $data_info['key_field5']?>" id="key_field5" placeholder="关键词字段5" size="120" />
+						 <input name="key_field5" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field5']?>" id="key_field5" placeholder="关键词英文字段5" size="120" />
 						 <input name="keyword5" type="text" class="form-control keycon" value="<?php echo $data_info['keyword5']?>" id="keyword5" placeholder="关键词内容5" size="400" />
 						</div>
 					</div>
@@ -122,7 +122,8 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">跳转链接url</label>
 						<div class="col-sm-4">
-						  <input name="url" type="text" class="form-control" value="<?php echo $data_info['url']?>" id="url" placeholder="" size="400" />
+						  <input name="url" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" onblur="checksiteurl()" class="form-control" value="<?php echo $data_info['url']?>" id="url" placeholder="请以http|https://开头" size="400" />
+						  <span id="link_error_msg"></span>
 						</div>
 					</div>
 			</fieldset>
@@ -132,7 +133,7 @@
 		<div class='form-actions'>
 		         <?php aci_ui_button($folder_name,'send','edit',' type="submit" id="dosubmit" class="btn btn-primary " ','立即推送')?>
 		         <span style="margin-left:178px;padding-right:10px;"><input type="text" id="test_openid" style="width:380px;" placeholder="请输入测试用户openid"></span>
-		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()">测试发送</a></span><br/>
+		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()"><i class="fa fa-star-half">&nbsp;测试发送</i></a></span><br/>
 		         <span style="margin-left:262px;font-size:9px;">测试用户openid请到<font color="red">配置公众号</font>栏目&gt;<font color="red">查看用户列表</font>,自己搜索获取即可.如遇无法操作问题,请联系系统管理人员</span>
 		</div>
      </div>

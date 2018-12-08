@@ -32,7 +32,7 @@
               <?php else:?>
                 <!-- <p class="lead">恭喜您安装成功，默认管理帐号 test/test</p> -->
                 <p class="lead">
-                  <p>{title}</p>
+                  <!-- <p>{title}</p> -->
                   <!-- <p>感谢@Alex 、 @青蛙 、 @zhanxing.tech </p> -->
 
                   <a href="<?php echo site_url('adminpanel')?>" class="btn btn-lg btn-default">进入后台管理</a>

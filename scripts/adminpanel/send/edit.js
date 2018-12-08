@@ -249,3 +249,14 @@ function testSend(){
 		  }
 	  });	
 }
+function checksiteurl(){
+	 var url=document.getElementById("url").value;
+	 var reg=/^[a-zA-z]+:\/\/[^\s]*$/;
+	 if(!reg.test(url)){
+		 $('#link_error_msg').html("<font color='red'>链接格式错误</font>");
+		 $('#url').focus();
+	 }
+	 else{
+		 $('#link_error_msg').html("<font color='green'>格式正确</font>");			 
+	 }
+	}

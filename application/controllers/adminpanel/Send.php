@@ -332,7 +332,9 @@ class Send extends Admin_Controller {
 		}else{
 			$user_list = $this->Send_model->get_subscribe_user_list_batch($access_token,$appid);			
 		}	
-		
+		if(!$user_list){
+		  exit(json_encode(array('status'=>false,'tips'=>'该公众号下暂无关注用户列表')));
+		}
 		//加入队列		
 		$i=0;
 		$redis->rpush('batchtoken',$access_token);

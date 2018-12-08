@@ -27,7 +27,7 @@
                 <table class="table table-hover dataTable">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th><font color="gold"><i class="fa fa-star"></i></font></th>
                         <th>编号</th>
                         <th>账号名称</th>
                         <th>微信账号</th>
@@ -45,16 +45,16 @@
                             <td><input type="checkbox" name="pid[]" value="<?php echo $v['id'] ?>"/></td>
                             <td><?php echo $v['id'] ?></td>
                               <td><?php echo $v['account_name'] ?></td>
-                            <td><i><?php echo $v['wx_number'] ?></i>&nbsp;&nbsp;<a class="btn btn-info btn-xs" onclick="batchuserinfo('<?php echo $v['app_id'] ?>','<?php echo $v['app_secret'] ?>')">一键同步用户</a>
-                            &nbsp;&nbsp;<a class="btn btn-info  btn-xs" onclick="viewuserinfo('<?php echo $v['app_id'] ?>')">查看用户列表</a></td>
+                            <td><i><?php echo $v['wx_number'] ?></i>&nbsp;&nbsp;<a class="btn btn-info btn-xs" onclick="batchuserinfo('<?php echo $v['app_id'] ?>','<?php echo $v['app_secret'] ?>')"><i class="fa fa-users"> 一键同步用户</i></a>
+                            &nbsp;&nbsp;<a class="btn btn-info  btn-xs" onclick="viewuserinfo('<?php echo $v['app_id'] ?>')"><i class="fa fa-hand-o-right">查看用户列表</i></a></td>
                             <td><?php echo $v['app_id'] ?></td>
                             <td><?php echo $v['app_secret'] ?></td>                          
                             <td><?php echo $v['remark'] ?></td>
                               <td>
                             <?php if($v['status']==1): ?>
-                             <font color="green">启用</font>
+                             <font color="green"><i class="fa fa-check"></i></font>
                              <?php else:?>
-                             <font color="red">禁用</font>
+                             <font color="red"><i class="fa fa-ban"></i></font>
                             <?php endif; ?>
                             </td>                                                       
                            <td><?php echo $v['update_time'] ?></td>        

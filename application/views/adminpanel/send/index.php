@@ -27,7 +27,7 @@
                 <table class="table table-hover dataTable">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th><font color="gold"><i class="fa fa-star"></i></font></th>
                         <th>编号</th>
                         <th>公众号名称</th>
                         <th>模板编号</th>
@@ -51,9 +51,9 @@
                             <td><?php echo $v['keyword3'] ?></td>                      
                             <td>
                             <?php if($v['push_status']==1): ?>
-                             <font color="green">推送成功</font>
+                             <font color="green"><i class="fa fa-check"></i></font>
                              <?php else:?>
-                             <font color="red">推送失败</font>
+                             <font color="red"><i class="fa fa-close (alias)"></i></font>
                             <?php endif; ?>
                             </td>
                            <td><?php echo $v['update_time'] ?></td>   
