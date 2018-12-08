@@ -21,4 +21,8 @@ define(function (require) {
 			$("#form_list").submit();
 		}
 	});
+	// 查看图片
+	$('.test-popup-link').magnificPopup({
+	    type: 'image',
+	});
 });

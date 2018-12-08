@@ -42,31 +42,31 @@ function send_template_msg($openid){
 		"data"=>array(
 				"first"=>array(
 						"value"=>$opt_json->first,
-						"color"=>"#727193"
+						"color"=>$opt_json->first_color
 				),						
 				"{$opt_json->key_field1}"=>array(
 						"value"=>$opt_json->keyword1,
-						"color"=>"#727193"
+						"color"=>$opt_json->keyword1_color
 				),
 				"{$opt_json->key_field2}"=>array(
 						"value"=>$opt_json->keyword2,
-						"color"=>"#727193"
+						"color"=>$opt_json->keyword2_color
 				),
 				"{$opt_json->key_field3}"=>array(
 						"value"=>$opt_json->keyword3,
-						"color"=>"#727193"
+						"color"=>$opt_json->keyword3_color
 				),
 				"{$opt_json->key_field4}"=>array(
 						"value"=>$opt_json->keyword4,
-						"color"=>"#727193"			
+						"color"=>$opt_json->keyword4_color			
 				),
 				"{$opt_json->key_field5}"=>array(
 						"value"=>$opt_json->keyword5,
-						"color"=>"#727193"			
+						"color"=>$opt_json->keyword5_color			
 				),
 				"remark"=>array(
 						"value"=>$opt_json->remark,
-						"color"=>"#727193"
+						"color"=>$opt_json->remark_color
 				),
 		),
 		);

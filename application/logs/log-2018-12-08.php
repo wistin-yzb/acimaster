@@ -228,3 +228,164 @@ ERROR - 2018-12-08 12:21:05 --> Session: session.auto_start is enabled in php.in
 ERROR - 2018-12-08 12:21:11 --> Session: session.auto_start is enabled in php.ini. Aborting.
 ERROR - 2018-12-08 12:21:19 --> Session: session.auto_start is enabled in php.ini. Aborting.
 ERROR - 2018-12-08 12:21:20 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:25:55 --> Session: session.auto_start is enabled in php.ini. Aborting.
+                                                                                                                                                                                          ERROR - 2018-12-08 12:54:32 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:54:33 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-08 12:54:34 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:54:35 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:54:41 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:54:42 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:54:53 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:55:32 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:55:32 --> 404 Page Not Found: Merchant/css
+ERROR - 2018-12-08 12:55:41 --> 404 Page Not Found: Merchant/css
+ERROR - 2018-12-08 12:55:48 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:55:48 --> 404 Page Not Found: Merchant/css
+ERROR - 2018-12-08 12:57:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:57:15 --> 404 Page Not Found: Magnific-Popup-master/dist
+ERROR - 2018-12-08 12:57:37 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:58:36 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:58:55 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 12:59:31 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:02:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:02:24 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:04:00 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:04:23 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:04:44 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:05:52 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:10:01 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:10:02 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:10:03 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:10:13 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:10:13 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-08 13:10:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:10:16 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:18:57 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:18:57 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-08 13:18:59 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:19:57 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:20:08 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:20:08 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-08 13:20:32 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:20:33 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:20:33 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-08 13:20:48 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:20:53 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:23:27 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:24:33 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:25:35 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:26:10 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:26:26 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:27:10 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:27:17 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:28:48 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:29:21 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:29:42 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:31:24 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:34:53 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:35:38 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:36:19 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:36:31 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:38:21 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:39:05 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:39:49 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:40:12 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:40:42 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:41:09 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:42:41 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:44:14 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:45:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:45:39 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:46:13 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:47:13 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:47:51 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:49:08 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:50:24 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:51:33 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:52:56 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:53:22 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:54:36 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:55:18 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:55:46 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:56:16 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 13:57:16 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:04:21 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:04:21 --> Severity: Notice --> Undefined index: first_color F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.acimaster.devp\application\views\adminpanel\send\edit.php 73
+ERROR - 2018-12-08 14:04:21 --> Severity: Notice --> Undefined index: keyword1_color F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.acimaster.devp\application\views\adminpanel\send\edit.php 82
+ERROR - 2018-12-08 14:04:21 --> Severity: Notice --> Undefined index: keyword2_color F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.acimaster.devp\application\views\adminpanel\send\edit.php 91
+ERROR - 2018-12-08 14:04:21 --> Severity: Notice --> Undefined index: keyword3_color F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.acimaster.devp\application\views\adminpanel\send\edit.php 100
+ERROR - 2018-12-08 14:04:21 --> Severity: Notice --> Undefined index: keyword4_color F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.acimaster.devp\application\views\adminpanel\send\edit.php 109
+ERROR - 2018-12-08 14:04:21 --> Severity: Notice --> Undefined index: keyword5_color F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.acimaster.devp\application\views\adminpanel\send\edit.php 118
+ERROR - 2018-12-08 14:04:21 --> Severity: Notice --> Undefined index: remark_color F:\xampp-win32-5.6.3-0-VC11-installerroot\xammp\htdocs\www\www.acimaster.devp\application\views\adminpanel\send\edit.php 138
+ERROR - 2018-12-08 14:06:07 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:06:59 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:07:39 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:08:18 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:08:35 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:08:52 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:09:12 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:09:25 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:09:51 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:10:10 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 14:10:28 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:10:04 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:10:05 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:10:10 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:10:18 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:11:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:11:29 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:11:30 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:11:39 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:11:49 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:11:50 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:11:59 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:12:05 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:12:06 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:12:12 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:42:09 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:42:11 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:42:12 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:42:13 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:43:07 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:44:01 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:44:55 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:46:17 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:46:29 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:47:04 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:47:46 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:47:59 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:48:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:48:43 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:49:36 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:49:52 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:49:54 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:50:05 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:50:48 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:51:40 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 15:59:58 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:00:36 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:03:57 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:03:57 --> 404 Page Not Found: adminpanel/Send/images
+ERROR - 2018-12-08 16:04:32 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:04:32 --> 404 Page Not Found: adminpanel/Send/images
+ERROR - 2018-12-08 16:05:29 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:05:50 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:06:13 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:07:34 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:08:20 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:09:47 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:11:08 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:14:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:15:29 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:15:51 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:16:26 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:16:41 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:18:04 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:18:17 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:19:12 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:19:28 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:21:08 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:21:43 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:22:08 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:22:15 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-08 16:22:22 --> Session: session.auto_start is enabled in php.ini. Aborting.

@@ -201,37 +201,79 @@ define(function (require) {
 		    }});//===End
 		   $('#account_name').val($.trim(text)); 		   
 	  })   
+	  document.querySelector("#first_color_btn").onchange = function () {
+		    document.getElementById('first_color_btn').click();
+		    $('#first_color').val(this.value);
+      }
+	  document.querySelector("#keyword1_color_btn").onchange = function () {
+		    document.getElementById('keyword1_color_btn').click();
+		    $('#keyword1_color').val(this.value);
+      }
+	  document.querySelector("#keyword2_color_btn").onchange = function () {
+		    document.getElementById('keyword2_color_btn').click();
+		    $('#keyword2_color').val(this.value);
+      }
+	  document.querySelector("#keyword3_color_btn").onchange = function () {
+		    document.getElementById('keyword3_color_btn').click();
+		    $('#keyword3_color').val(this.value);
+      }
+	  document.querySelector("#keyword4_color_btn").onchange = function () {
+		    document.getElementById('keyword4_color_btn').click();
+		    $('#keyword4_color').val(this.value);
+      }
+	  document.querySelector("#keyword5_color_btn").onchange = function () {
+		    document.getElementById('keyword5_color_btn').click();
+		    $('#keyword5_color').val(this.value);
+      }
+	  document.querySelector("#remark_color_btn").onchange = function () {
+		    document.getElementById('remark_color_btn').click();
+		    $('#remark_color').val(this.value);
+      }
+	// 查看图片
+		$('.test-popup-link').magnificPopup({
+		    type: 'image',
+		});
 });
 //测试发送单个用户
 function testSend(){
 	var service_id = $.trim($('#service_id').val());
 	var temp_id  = $.trim($("input[name='temp_id']:checked").val());
 	var first = $.trim($('#first').val());
+	var first_color = $.trim($('#first_color').val());
 	
 	var key_field1 = $.trim($('#key_field1').val());
 	var keyword1 = $.trim($('#keyword1').val());
+	var keyword1_color = $.trim($('#keyword1_color').val());
 	
 	var key_field2 = $.trim($('#key_field2').val());
 	var keyword2 = $.trim($('#keyword2').val());
+	var keyword2_color = $.trim($('#keyword2_color').val());
 	
 	var key_field3 = $.trim($('#key_field3').val());
 	var keyword3 = $.trim($('#keyword3').val());
+	var keyword3_color = $.trim($('#keyword3_color').val());
 	
 	var account_name = $.trim($('#account_name').val());
 	var key_field4 = $.trim($('#key_field4').val());
 	var keyword4 = $.trim($('#keyword4').val());	
+	var keyword4_color = $.trim($('#keyword4_color').val());
+	
 	var key_field5 = $.trim($('#key_field5').val());
 	var keyword5 = $.trim($('#keyword5').val());
+	var keyword5_color = $.trim($('#keyword5_color').val());
+	
 	var invest_style = $.trim($('#invest_style').val());
 	var invest_profit = $.trim($('#invest_profit').val());
 	var remark = $.trim($('#remark').val());
+	var remark_color = $.trim($('#remark_color').val());
+	
 	var url = $.trim($('#url').val());
 	
 	var test_openid = $.trim($('#test_openid').val());
-	var params = {"test_openid":test_openid,"service_id":service_id,"temp_id":temp_id,"first":first,
-			                       "key_field1":key_field1,"keyword1":keyword1,"key_field2":key_field2,"keyword2":keyword2,"key_field3":key_field3,
-			                       "keyword3":keyword3,"account_name":account_name,"key_field4":key_field4,"keyword4":keyword4,"key_field5":key_field5,
-			                       "keyword5":keyword5,"invest_style":invest_style,"invest_profit":invest_profit,"remark":remark,"url":url
+	var params = {"test_openid":test_openid,"service_id":service_id,"temp_id":temp_id,"first":first,"first_color":first_color,
+			                       "key_field1":key_field1,"keyword1":keyword1,"keyword1_color":keyword1_color,"key_field2":key_field2,"keyword2":keyword2,"keyword2_color":keyword2_color,"key_field3":key_field3,
+			                       "keyword3":keyword3,"keyword3_color":keyword3_color,"account_name":account_name,"key_field4":key_field4,"keyword4":keyword4,"keyword4_color":keyword4_color,"key_field5":key_field5,
+			                       "keyword5":keyword5,"keyword5_color":keyword5_color,"invest_style":invest_style,"invest_profit":invest_profit,"remark":remark,"remark_color":remark_color,"url":url
 			                       };	
 	console.log(params);
 	  $.ajax({

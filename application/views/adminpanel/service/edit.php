@@ -22,19 +22,19 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">微信账号<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="wx_number" type="text" class="form-control validate[required]" id="wx_number" placeholder="(必填)" value="<?php echo $data_info['wx_number']?>" size="120" />
+						  <input name="wx_number" type="text"class="form-control validate[required]" id="wx_number" placeholder="(必填)" value="<?php echo $data_info['wx_number']?>" size="120"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label  class="col-sm-2 control-label">应用appId<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="app_id" type="text" class="form-control" id="app_id" placeholder="(必填)" value="<?php echo $data_info['app_id']?>" size="120" />
+						  <input name="app_id" type="text" class="form-control" id="app_id" placeholder="(必填)" value="<?php echo $data_info['app_id']?>" size="120"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">应用appSecret<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="app_secret" type="text" class="form-control" value="<?php echo $data_info['app_secret']?>" id="app_secret" placeholder="(必填)" size="120" />
+						  <input name="app_secret" type="text" class="form-control" value="<?php echo $data_info['app_secret']?>" id="app_secret" placeholder="(必填)" size="120"/>
 						</div>
 					</div>
                     <div class="form-group">

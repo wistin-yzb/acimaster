@@ -53,7 +53,7 @@
                             <?php if($v['headimgurl']==''):?>
                                <i class="fa fa-image (alias)"></i>
                             <?php else:?>
-                            <a href="<?php echo $v['headimgurl'] ?>" target="__blank"><img src="<?php echo $v['headimgurl'] ?>" style="width:50px;" title="点击查看大图"></a>
+                            <a href="<?php echo $v['headimgurl'] ?>" class="test-popup-link" target="__blank"><img src="<?php echo $v['headimgurl'] ?>" style="width:50px;" title="点击查看大图"></a>
                             <?php endif;?>                            
                             </td>
                              <td>
@@ -95,9 +95,11 @@
     </form>
 </div>
 </div>
+<link rel="stylesheet" href="<?php echo SITE_URL?>scripts/Magnific-Popup-master/dist/magnific-popup.css"/>
 <script language="javascript" type="text/javascript">
     var folder_name = "<?php echo $folder_name?>";
     require(['<?php echo SITE_URL?>scripts/common.js'], function (common) {
         require(['<?php echo SITE_URL?>scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/index.js']);
+        require(['<?php echo SITE_URL?>scripts/Magnific-Popup-master/dist/jquery.magnific-popup.min.js']);
     });
 </script>
