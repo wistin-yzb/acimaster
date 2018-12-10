@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+.tgl {
+	text-align: left !important;
+}
+
+.tipmsg {
+	font-size: 12px;
+	height: 33px;
+	line-height: 33px;
+	background-color: whitesmoke;
+}
+
+.edit_send_time {
+	position: relative;
+	top: .6rem;
+}
+
+#template_number>.tps {
+	padding: 0 20px 0 0;
+	font-size: 14px;
+	position: relative;
+	top: 5px;
+	height: 33px;
+	line-height: 33px;
+}
+
+.send-notice {
+	font-size: 12px;
+	padding-bottom: 20px;
+	background: #D2E7F7;
+	border: 1px solid #7AB1DE;
+	padding: 5px 10px;
+	line-height: 22px;
+}
+
+.tmpcont {
+	font-size: 16px;
+	width: 100%;
+	height: 33px;
+	line-height: 33px;
+	background-color: whitesmoke;
+	border: 1px solid #eee;
+	margin-left: 0 !important;
+}
+
+.test-popup-link {
+	margin-left: 1%;
+}

@@ -4,7 +4,6 @@ $redis->connect('127.0.0.1',6379);
 $redis->auth('admin888');
 $redis -> select('0');
 $list = $redis->lrange('groupsend',0,-1);
-
 if($list){
 	$i=0;
 	$len = $redis->lLen('groupsend');

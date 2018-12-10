@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+.w174 {
+	width: 200px;
+}
+
+.line-s {
+	height: 24px;
+	line-height: 24px !important;
+}
+
+.keycon {
+	position: relative;
+	margin-top: -34px;
+	margin-left: 210px;
+}
+
+.keycolor {
+	position: relative;
+	margin-top: -34px;
+	margin-left: 310px;
+	width: 170px;
+}
+
+.keycolorbtn {
+	position: relative;
+	margin-top: -34px;
+	margin-left: 487px;
+	width: 50px;
+}
+
+.keycolormid {
+	position: relative;
+	margin-top: -34px;
+	margin-left: 522px;
+	width: 200px;
+}
+
+.keycolorbtnmid {
+	position: relative;
+	margin-top: -34px;
+	margin-left: 732px;
+	width: 50px;
+}
+
+.keycolorfoot {
+	position: relative;
+	margin-top: -34px;
+	margin-left: 312px;
+	width: 110px;
+}
+
+.keycolorbtnfoot {
+	position: relative;
+	margin-top: -34px;
+	margin-left: 432px;
+	width: 50px;
+}
+
+.templateexample {
+	width: 234px;
+	height: 120px;
+	border: 1px solid #eee;
+	padding: 4px;
+}
+
+.testsend {
+	margin-left: 80px;
+	padding-right: 6px;
+}
+
+.testsend>input {
+	width: 303px;
+}
+
+.footremark {
+	margin-left: 165px;
+	font-size: 12px;
+}
