@@ -19,13 +19,14 @@ line-s {
 	position: relative;
 	margin-top: -34px;
 	margin-left: 500px;
-	width: 170px;
+	width: 100px;
+	padding-right: 0 !important;
 }
 
 .keycolorbtn {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 680px;
+	margin-left: 609px;
 	width: 50px;
 }
 
@@ -33,13 +34,14 @@ line-s {
 	position: relative;
 	margin-top: -34px;
 	margin-left: 710px;
-	width: 200px;
+	width: 100px;
+	padding-right: 0 !important;
 }
 
 .keycolorbtnmid {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 918px;
+	margin-left: 819px;
 	width: 50px;
 }
 
@@ -47,13 +49,14 @@ line-s {
 	position: relative;
 	margin-top: -34px;
 	margin-left: 500px;
-	width: 110px;
+	width: 100px;
+	padding-right: 0 !important;
 }
 
 .keycolorbtnfoot {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 620px;
+	margin-left: 609px;
 	width: 50px;
 }
 
@@ -76,4 +79,15 @@ line-s {
 .footremark {
 	margin-left: 262px;
 	font-size: 12px;
+}
+
+.tipmsg {
+	font-size: 12px;
+	height: 33px;
+	line-height: 33px;
+	background-color: whitesmoke;
+}
+
+.test-popup-link {
+	margin-left: 1%;
 }

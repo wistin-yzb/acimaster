@@ -65,8 +65,8 @@
 						<div class="col-sm-4">
 						  <!-- <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="400" /> -->
 						  <textarea name="first"  id="first" class="form-control" style="height: 75px;" placeholder="(必填)"><?php echo $data_info['first']?></textarea>
-						  <input type="text"  id="first_color" class="form-control keycolor" name="first_color" placeholder="开头first字体颜色" value="<?php echo $data_info['first_color']?>">
-						   <input type="color" class="form-control keycolorbtn" style="padding-right:10px;" id="first_color_btn" value="<?php echo $data_info['first_color']?>">
+						  <input type="text"  id="first_color" class="form-control keycolor" name="first_color" placeholder="字体颜色值" value="<?php echo $data_info['first_color']?>">
+						   <input type="color" class="form-control keycolorbtn" title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="first_color_btn" value="<?php echo $data_info['first_color']?>">
 						</div>
 					</div>
 					<div class="form-group">
@@ -74,8 +74,8 @@
 						<div class="col-sm-4">
 						 <input name="key_field1" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field1']?>" id="key_field1" placeholder="关键词英文字段1(必填)" size="120" />
 						  <input name="keyword1" type="text" class="form-control keycon" value="<?php echo $data_info['keyword1']?>" id="keyword1" placeholder="关键词内容1(必填)" size="400" />
-						  <input type="text"  id="keyword1_color" class="form-control keycolormid" name="keyword1_color" placeholder="中间keyword1字体颜色" value="<?php echo $data_info['keyword1_color']?>">
-						   <input type="color" class="form-control keycolorbtnmid" style="padding-right:10px;" id="keyword1_color_btn" value="<?php echo $data_info['keyword1_color']?>">
+						  <input type="text"  id="keyword1_color" class="form-control keycolormid" name="keyword1_color" placeholder="字体颜色值" value="<?php echo $data_info['keyword1_color']?>">
+						   <input type="color" class="form-control keycolorbtnmid" title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="keyword1_color_btn" value="<?php echo $data_info['keyword1_color']?>">
 						</div>
 					</div>
                     <div class="form-group">
@@ -83,8 +83,8 @@
 						<div class="col-sm-4">
 						  <input name="key_field2" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field2']?>" id="key_field2" placeholder="关键词英文字段2(必填)" size="120" />
 						  <input name="keyword2" type="text" class="form-control keycon" value="<?php echo $data_info['keyword2']?>" id="keyword2" placeholder="关键词内容2(必填)" size="400" />
-						   <input type="text"  id="keyword2_color" class="form-control keycolormid" name="keyword2_color" placeholder="中间keyword2字体颜色" value="<?php echo $data_info['keyword2_color']?>">
-						   <input type="color" class="form-control keycolorbtnmid" style="padding-right:10px;" id="keyword2_color_btn" value="<?php echo $data_info['keyword2_color']?>">
+						   <input type="text"  id="keyword2_color" class="form-control keycolormid" name="keyword2_color" placeholder="字体颜色值" value="<?php echo $data_info['keyword2_color']?>">
+						   <input type="color" class="form-control keycolorbtnmid" title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="keyword2_color_btn" value="<?php echo $data_info['keyword2_color']?>">
 						</div>
 					</div> 
                    <div class="form-group">
@@ -92,8 +92,8 @@
 						<div class="col-sm-4">
 						 <input name="key_field3" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field3']?>" id="key_field3" placeholder="关键词英文字段3(必填)" size="120" />
 						  <input name="keyword3" type="text" class="form-control keycon" value="<?php echo $data_info['keyword3']?>" id="keyword3" placeholder="关键词内容3(必填)" size="400" />
-						  <input type="text"  id="keyword3_color" class="form-control keycolormid" name="keyword3_color" placeholder="中间keyword3字体颜色" value="<?php echo $data_info['keyword3_color']?>">
-						   <input type="color" class="form-control keycolorbtnmid" style="padding-right:10px;" id="keyword3_color_btn" value="<?php echo $data_info['keyword3_color']?>">
+						  <input type="text"  id="keyword3_color" class="form-control keycolormid" name="keyword3_color" placeholder="字体颜色值" value="<?php echo $data_info['keyword3_color']?>">
+						   <input type="color" class="form-control keycolorbtnmid"  title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="keyword3_color_btn" value="<?php echo $data_info['keyword3_color']?>">
 						</div>
 					</div>           
 					<div class="form-group">
@@ -101,8 +101,8 @@
 						<div class="col-sm-4">
 						  <input name="key_field4" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field4']?>" id="key_field4" placeholder="关键词英文字段4" size="120" />
 						  <input name="keyword4" type="text" class="form-control keycon" value="<?php echo $data_info['keyword4']?>" id="keyword4" placeholder="关键词内容4" size="400" />
-						  <input type="text"  id="keyword4_color" class="form-control keycolormid" name="keyword4_color" placeholder="中间keyword4字体颜色" value="<?php echo $data_info['keyword4_color']?>">
-						   <input type="color" class="form-control keycolorbtnmid" style="padding-right:10px;" id="keyword4_color_btn" value="<?php echo $data_info['keyword4_color']?>">
+						  <input type="text"  id="keyword4_color" class="form-control keycolormid" name="keyword4_color" placeholder="字体颜色值" value="<?php echo $data_info['keyword4_color']?>">
+						   <input type="color" class="form-control keycolorbtnmid" title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="keyword4_color_btn" value="<?php echo $data_info['keyword4_color']?>">
 						</div>
 					</div>
 					<div class="form-group">
@@ -110,8 +110,8 @@
 						<div class="col-sm-4">
 						 <input name="key_field5" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" class="form-control w174" value="<?php echo $data_info['key_field5']?>" id="key_field5" placeholder="关键词英文字段5" size="120" />
 						 <input name="keyword5" type="text" class="form-control keycon" value="<?php echo $data_info['keyword5']?>" id="keyword5" placeholder="关键词内容5" size="400" />
-						 <input type="text"  id="keyword5_color" class="form-control keycolormid" name="keyword5_color" placeholder="中间keyword5字体颜色" value="<?php echo $data_info['keyword5_color']?>">
-						   <input type="color" class="form-control keycolorbtnmid" style="padding-right:10px;" id="keyword5_color_btn" value="<?php echo $data_info['keyword5_color']?>">
+						 <input type="text"  id="keyword5_color" class="form-control keycolormid" name="keyword5_color" placeholder="字体颜色值" value="<?php echo $data_info['keyword5_color']?>">
+						   <input type="color" class="form-control keycolorbtnmid" title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="keyword5_color_btn" value="<?php echo $data_info['keyword5_color']?>">
 						</div>
 					</div>
 					<div class="form-group">
@@ -130,8 +130,8 @@
 						<label class="col-sm-2 control-label">结尾remark</label>
 						<div class="col-sm-4">
 						  <textarea name="remark"  id="remark" class="form-control" style="height: 75px;" placeholder="非必填"><?php echo $data_info['remark']?></textarea>
-						  <input type="text"  id="remark_color" class="form-control keycolorfoot" name="remark_color" placeholder="备注字体颜色" value="<?php echo $data_info['remark_color']?>">
-						   <input type="color" class="form-control keycolorbtnfoot" style="padding-right:10px;" id="remark_color_btn" value="<?php echo $data_info['remark_color']?>">
+						  <input type="text"  id="remark_color" class="form-control keycolorfoot" name="remark_color" placeholder="字体颜色值" value="<?php echo $data_info['remark_color']?>">
+						   <input type="color" class="form-control keycolorbtnfoot"  title="点击设置字体颜色"  style="cursor:pointer;padding-right:10px;" id="remark_color_btn" value="<?php echo $data_info['remark_color']?>">
 						</div>
 					</div>
 					<div class="form-group">

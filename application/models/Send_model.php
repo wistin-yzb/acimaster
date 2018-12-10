@@ -8,32 +8,35 @@ class Send_model extends Base_Model {
 		parent::__construct ();
 	}
 	
-	//default
+	/**
+	 * default-#000000
+	 * #727193
+	 */
 	function default_info(){
 		return array(
 				'id'=>0,
 				'temp_id'=>'',
 				'first'=>'',
-				'first_color'=>'#727193',
+				'first_color'=>'#000000',
 				'keyword1'=>'',
 				'key_field1'=>'',
-				'keyword1_color'=>'#727193',
+				'keyword1_color'=>'#000000',
 				'keyword2'=>'',
 				'key_field2'=>'',
-				'keyword2_color'=>'#727193',
+				'keyword2_color'=>'#000000',
 				'keyword3'=>'',
 				'key_field3'=>'',
-				'keyword3_color'=>'#727193',
+				'keyword3_color'=>'#000000',
 				'keyword4'=>'',
 				'key_field4'=>'',
-				'keyword4_color'=>'#727193',
+				'keyword4_color'=>'#000000',
 				'keyword5'=>'',
 				'key_field5'=>'',
-				'keyword5_color'=>'#727193',
+				'keyword5_color'=>'#000000',
 				'invest_style'=>'',
 				'invest_profit'=>'',
 				'remark'=>'',
-				'remark_color'=>'#727193',
+				'remark_color'=>'#000000',
 				'url'=>'',
 				'push_status'=>0,
 				'account_name'=>'',

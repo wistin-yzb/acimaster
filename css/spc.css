@@ -1,7 +1,11 @@
 @charset "utf-8";
 
+#service_id {
+	width: 170%;
+}
+
 .w174 {
-	width: 200px;
+	width: 73%;
 }
 
 .line-s {
@@ -12,68 +16,82 @@
 .keycon {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 210px;
+	margin-left: 75%;
 }
 
 .keycolor {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 310px;
-	width: 170px;
+	margin-left: 103%;
+	width: 59%;
 }
 
 .keycolorbtn {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 487px;
+	margin-left: 165%;
 	width: 50px;
 }
 
 .keycolormid {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 522px;
-	width: 200px;
+	margin-left: 177%;
+	width: 71%;
 }
 
 .keycolorbtnmid {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 732px;
+	margin-left: 250%;
 	width: 50px;
 }
 
 .keycolorfoot {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 312px;
-	width: 110px;
+	margin-left: 103%;
+	width: 39%;
 }
 
 .keycolorbtnfoot {
 	position: relative;
 	margin-top: -34px;
-	margin-left: 432px;
+	margin-left: 145%;
 	width: 50px;
 }
 
 .templateexample {
-	width: 234px;
-	height: 120px;
+	width: 29%;
+	height: 90px;
 	border: 1px solid #eee;
 	padding: 4px;
 }
 
 .testsend {
-	margin-left: 80px;
+	margin-left: 8%;
 	padding-right: 6px;
 }
 
 .testsend>input {
-	width: 303px;
+	width: 22%;
 }
 
 .footremark {
-	margin-left: 165px;
+	display: inline-block;
+	margin-left: 17%;
+	font-size: 80%;
+	width: 80%;
+}
+
+.tipmsg {
 	font-size: 12px;
+	height: auto;
+	line-height: 24px;
+	background-color: whitesmoke;
+	padding: 5px;
+}
+
+.test-popup-link {
+	margin-left: 2%;
 }

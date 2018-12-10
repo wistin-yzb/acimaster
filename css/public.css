@@ -4,13 +4,6 @@
 	text-align: left !important;
 }
 
-.tipmsg {
-	font-size: 12px;
-	height: 33px;
-	line-height: 33px;
-	background-color: whitesmoke;
-}
-
 .edit_send_time {
 	position: relative;
 	top: .6rem;
@@ -42,8 +35,4 @@
 	background-color: whitesmoke;
 	border: 1px solid #eee;
 	margin-left: 0 !important;
-}
-
-.test-popup-link {
-	margin-left: 1%;
 }
