@@ -45,7 +45,7 @@
 					</div> 
 					 <div class="form-group">
 						<label class="col-sm-2 control-label">启用状态</label>
-						<div class="col-sm-1">
+						<div class="col-sm-2">
 						  <select class="form-control"  name="status" id="status">					           
 					  			<option value=1  <?php if($data_info['status']==1):?>selected<?php endif;?>>启用</option>
 					  			<option value=2 <?php if($data_info['status']==2):?>selected<?php endif;?>>禁用</option>

@@ -352,7 +352,10 @@ class Send extends Admin_Controller {
 			$user_list = json_decode($user_list);
 		}else{
 			$user_list = $this->Send_model->get_subscribe_user_list_batch($access_token,$appid);			
-		}	
+		}
+		//创建指定数据表
+		$createtable_url = "http://{$_SERVER['SERVER_NAME']}/createtable.php?appid=$appid";
+		$result = $this->Send_model->https_request($createtable_url);
 		if(!$user_list){
 		  exit(json_encode(array('status'=>false,'tips'=>'该公众号下暂无关注用户列表')));
 		}
@@ -368,10 +371,7 @@ class Send extends Admin_Controller {
 				$str = str_replace('"', '', $user_list[$i]);
 				$redis->rpush('batchdata',$str);
 				$i++;
-	      }
-	      //创建指定数据表
-	      $createtable_url = "http://{$_SERVER['SERVER_NAME']}/createtable.php?appid=$appid"; 
-	      $result = $this->Send_model->https_request($createtable_url);
+	      }	      
 	      exit(json_encode(array('status'=>true,'tips'=>'一键同步该公众号下的用户成功')));
 		#==End
 	}

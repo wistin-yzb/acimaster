@@ -90,10 +90,9 @@
                 </div>
             </div>
         <?php else: ?>
-            <div class="alert alert-warning" role="alert"> 暂无数据显示... 您可以进行新增操作</div>
+            <div class="alert alert-warning" role="alert"> 暂无数据显示...</div>
         <?php endif; ?>
     </form>
-</div>
 </div>
 <link rel="stylesheet" href="<?php echo SITE_URL?>scripts/Magnific-Popup-master/dist/magnific-popup.css"/>
 <script language="javascript" type="text/javascript">

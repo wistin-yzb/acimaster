@@ -1,19 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed.'); ?>
-<style>
-	.line-s{height:30px;line-height:30px !important;}
-	.tgl{text-align:left !important;}
-	.tipmsg{font-size:12px;height:33px;line-height:33px;background-color:whitesmoke;}
-	.edit_send_time{position:relative;top:.6rem;}
-	#template_number>.tps{padding: 0 20px 0 0;font-size: 14px;position: relative;top: 5px;height: 33px;line-height: 33px;}
-	.w174{width:200px;}
-	.keycon{position: relative;margin-top:-34px;margin-left: 210px;}
-	.keycolor{position: relative;margin-top:-34px;margin-left: 500px;width:170px;}
-	.keycolorbtn{position: relative;margin-top:-34px;margin-left: 680px;width:50px;}
-	.keycolormid{position: relative;margin-top:-34px;margin-left: 710px;width:200px;}
-	.keycolorbtnmid{position: relative;margin-top:-34px;margin-left: 918px;width:50px;}
-	.keycolorfoot{position: relative;margin-top:-34px;margin-left: 500px;width:110px;}
-	.keycolorbtnfoot{position: relative;margin-top:-34px;margin-left: 620px;width:50px;}
-</style>
+<link href="<?php echo SITE_URL?>css/public.css" rel="stylesheet" >
+<link href="<?php echo SITE_URL?>css/spc.css" rel="stylesheet" media="only screen and (min-width:769px) and (max-width:1200px)">
+<link href="<?php echo SITE_URL?>css/bpc.css" rel="stylesheet" media="only screen and (min-width:1201px)">
 <form class="form-horizontal" role="form" id="validateform" name="validateform" action="<?php echo current_url()?>" >
 <div class='panel panel-default' style="margin-bottom:130px;">
 	<div class='panel-heading'>
@@ -30,16 +18,16 @@
 		<fieldset>
 				<legend class="tipmsg">&nbsp;<i class="fa fa-volume-up"></i>&nbsp;提示：要求账号为服务号并认证，对所有用户发送时需准守微信公众平台行为规范。PRID：sUroer1rqkwvMVL4pQK2GYk4itRb_qLacN_FzAZ5i5E</legend>
 				  <!--/.diy style-->
-				  <legend style="font-size:12px;padding-bottom:20px;">
+				  <legend class="send-notice">
+				  【重要通知】<br/>
 				  模板消息仅用于公众号向用户发送重要的服务通知，只能用于符合其要求的服务场景中，如信用卡刷卡通知，商品购买成功通知等。不支持广告等营销类消息以及其它所有可能对用户造成骚扰的消息。<br/>
-                 <br/>
                   关于使用规则，请注意：<br/>
 				  1、所有服务号都可以在功能->添加功能插件处看到申请模板消息功能的入口，但只有认证后的服务号才可以申请模板消息的使用权限并获得该权限；<br/>
                   2、需要选择公众账号服务所处的2个行业，每月可更改1次所选行业；<br/>
                   3、在所选择行业的模板库中选用已有的模板进行调用；<br/>
                   4、每个账号可以同时使用25个模板。<br/>
                   5、<font color="red">当前每个账号的模板消息的日调用上限为10万次</font>，单个模板没有特殊限制。【2014年11月18日将接口调用频率从默认的日1万次提升为日10万次，可在MP登录后的开发者中心查看】。当账号粉丝数超过10W/100W/1000W时，模板消息的日调用上限会相应提升，以公众号MP后台开发者中心页面中标明的数字为准。
-                          <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277" target="_blank"><font color="blue">文档详情</font>&nbsp;<i class="fa fa-angle-double-right"></i></a>  
+                          <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277" target="_blank"><font color="#0071ce">文档详情</font>&nbsp;<i class="fa fa-angle-double-right"></i></a>  
                   </legend>                        
                      <div class="form-group">
 						<label class="col-sm-2 control-label">公众号<font color="red">*</font></label>
@@ -59,24 +47,24 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">发送对象</label>
 						<div class="col-sm-4">
-						    <span class="line-s" style="font-size:12px;"><font color="red">立即推送</font>：当前公众号下关注的所有用户 <font color="red">测试发送</font>：仅发送单个指定的测试openid用户</span><br/>
-						    <font color="red"><i class="fa fa-volume-up"></i>&nbsp;</font><span style="font-size:12px;color:blue;">强烈建议推送给所有用户之前务必要做测试发送预览</span>						    
+						    <span class="line-s" style="font-size:12px;"><font color="red">立即推送</font>：当前公众号下关注的所有用户<br/><font color="red">测试发送</font>：仅发送单个指定的测试openid用户</span><br/>
+						    <i class="fa fa-volume-up"></i>&nbsp;<span style="font-size:12px;color:#337ab7;">强烈建议推送给所有用户之前务必要做测试发送预览</span>						    
 						</div>
 					</div>
-					<div  class="form-group" style="font-size:16px;width:50%;height:33px;line-height:33px;background-color:honeydew;border:1px solid #eee;">
-					         <label  class="col-sm-2 control-label"></label>					         
-					       <div class="col-sm-4">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text"></i> 模板内容</div>					       
+					<div  class="form-group tmpcont" >			         
+					       <div class="col-sm-4"><i class="fa fa-file-text"></i> 模板内容</div>					       
 					 </div>
 					 <div class="form-group">
-					        <div class="col-sm-3" style="text-align: right;"> 模板示例&nbsp;<i class="fa fa-hand-o-right"></i></div>		
+					        <div class="col-sm-2" style="text-align: right;">模板示例&nbsp;<i class="fa fa-hand-o-right"></i></div>		
 					           <a href="<?php echo SITE_URL?>images/templateexample.png" class="test-popup-link">
-					           <img src="<?php echo SITE_URL?>images/templateexample.png" title="点击查看大图" style="width:375px;height:120px;border:1px solid #eee;padding:4px;"/>
+					           <img src="<?php echo SITE_URL?>images/templateexample.png" title="点击查看大图" class="templateexample"/>
 					       </a>
 					 </div>
 					<div class="form-group">
 						<label  class="col-sm-2 control-label">开头first<font color="red">*</font></label>
 						<div class="col-sm-4">
-						  <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="400" />
+						  <!-- <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="400" /> -->
+						  <textarea name="first"  id="first" class="form-control" style="height: 75px;" placeholder="(必填)"><?php echo $data_info['first']?></textarea>
 						  <input type="text"  id="first_color" class="form-control keycolor" name="first_color" placeholder="开头first字体颜色" value="<?php echo $data_info['first_color']?>">
 						   <input type="color" class="form-control keycolorbtn" style="padding-right:10px;" id="first_color_btn" value="<?php echo $data_info['first_color']?>">
 						</div>
@@ -129,19 +117,19 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间invest_style</label>
 						<div class="col-sm-4">
-						  <input name="invest_style" type="text" class="form-control"  value="<?php echo $data_info['invest_style']?>" id="invest_style" placeholder="" size="400" />
+						  <input name="invest_style" type="text" class="form-control"  value="<?php echo $data_info['invest_style']?>" id="invest_style" placeholder="非必填" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">中间invest_profit</label>
 						<div class="col-sm-4">
-						  <input name="invest_profit" type="text" class="form-control" value="<?php echo $data_info['invest_profit']?>" id="invest_profit" placeholder="" size="400" />
+						  <input name="invest_profit" type="text" class="form-control" value="<?php echo $data_info['invest_profit']?>" id="invest_profit" placeholder="非必填" size="400" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">结尾remark</label>
 						<div class="col-sm-4">
-						  <textarea name="remark"  id="remark" class="form-control"><?php echo $data_info['remark']?></textarea>
+						  <textarea name="remark"  id="remark" class="form-control" style="height: 75px;" placeholder="非必填"><?php echo $data_info['remark']?></textarea>
 						  <input type="text"  id="remark_color" class="form-control keycolorfoot" name="remark_color" placeholder="备注字体颜色" value="<?php echo $data_info['remark_color']?>">
 						   <input type="color" class="form-control keycolorbtnfoot" style="padding-right:10px;" id="remark_color_btn" value="<?php echo $data_info['remark_color']?>">
 						</div>
@@ -159,9 +147,9 @@
             <input type="hidden" name="account_name" id="account_name" value="<?php echo $data_info['account_name']?>"/>
 		<div class='form-actions'>
 		         <?php aci_ui_button($folder_name,'send','edit',' type="submit" id="dosubmit" class="btn btn-primary " ','立即推送')?>
-		         <span style="margin-left:178px;padding-right:10px;"><input type="text" id="test_openid" style="width:380px;" placeholder="请输入测试用户openid"></span>
+		         <span class="testsend"><input type="text" id="test_openid" placeholder="请输入测试用户openid"></span>
 		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()"><i class="fa fa-star-half">&nbsp;测试发送</i></a></span><br/>
-		         <span style="margin-left:262px;font-size:9px;">测试用户openid请到<font color="red">配置公众号</font>栏目&gt;<font color="red">查看用户列表</font>,自己搜索获取即可.如遇无法操作问题,请联系系统管理人员</span>		          		           
+		         <span class="footremark">测试用户openid请到<font color="red">配置公众号</font>栏目<i class="fa fa-angle-double-right"></i><font color="red">查看用户列表</font>,自己搜索获取即可.如遇无法操作问题,请联系系统管理人员</span>		          		           
 		</div>
      </div>
   </div>

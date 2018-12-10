@@ -22,7 +22,8 @@ class Service extends Admin_Controller {
 		}
 		$where = implode(" and ",$where_arr);
 		$data_list = $this->Service_model->listinfo($where,'*',$orderby , $page_no, $this->Service_model->page_size,'',$this->Service_model->page_size,page_list_url('adminpanel/service/index',true));		
-		$this->view('index',array('data_list'=>$data_list,'pages'=>$this->Service_model->pages,'keyword'=>$keyword,'require_js'=>true));
+		$is_authed = $_SESSION['group_id']==1?true:false;
+		$this->view('index',array('data_list'=>$data_list,'is_authed'=>$is_authed,'pages'=>$this->Service_model->pages,'keyword'=>$keyword,'require_js'=>true));
 	}
 	
 	/**

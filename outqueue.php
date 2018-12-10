@@ -38,7 +38,7 @@ function send_template_msg($openid){
      $post_arr = array(
 		"touser"=>$openid,
 		"template_id"=>$opt_json->temp_id,
-		"url"=>$opt_json->url,	
+		"url"=>$opt_json->url,		
 		"data"=>array(
 				"first"=>array(
 						"value"=>$opt_json->first,

@@ -45,8 +45,11 @@
                             <td><input type="checkbox" name="pid[]" value="<?php echo $v['id'] ?>"/></td>
                             <td><?php echo $v['id'] ?></td>
                               <td><?php echo $v['account_name'] ?></td>
-                            <td><i><?php echo $v['wx_number'] ?></i>&nbsp;&nbsp;<a class="btn btn-info btn-xs" onclick="batchuserinfo('<?php echo $v['app_id'] ?>','<?php echo $v['app_secret'] ?>')"><i class="fa fa-users"> 一键同步用户</i></a>
-                            &nbsp;&nbsp;<a class="btn btn-info  btn-xs" onclick="viewuserinfo('<?php echo $v['app_id'] ?>')"><i class="fa fa-hand-o-right">查看用户列表</i></a></td>
+                            <td><i><?php echo $v['wx_number'] ?></i>
+                            <?php if($is_authed):?>
+                            &nbsp;&nbsp;<a class="btn btn-link btn-xs" onclick="batchuserinfo('<?php echo $v['app_id'] ?>','<?php echo $v['app_secret'] ?>')"><i class="fa fa-users"> &nbsp;一键同步用户</i></a>
+                            <?php endif;?>
+                            &nbsp;&nbsp;<a class="btn btn-link  btn-xs" onclick="viewuserinfo('<?php echo $v['app_id'] ?>')"><i class="fa fa-hand-o-right">&nbsp;查看用户列表</i></a></td>
                             <td><?php echo $v['app_id'] ?></td>
                             <td><?php echo $v['app_secret'] ?></td>                          
                             <td><?php echo $v['remark'] ?></td>
