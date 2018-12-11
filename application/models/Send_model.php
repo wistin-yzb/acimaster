@@ -38,6 +38,7 @@ class Send_model extends Base_Model {
 				'remark'=>'',
 				'remark_color'=>'#000000',
 				'url'=>'',
+				'auto_getnum'=>0,
 				'push_status'=>0,
 				'account_name'=>'',
 		);

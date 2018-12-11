@@ -32,8 +32,33 @@ function send_template_msg($openid){
      }      
              
      $opt_json = json_decode(file_get_contents('/usr/local/etc/groupdata.txt'));       
-     $template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$opt_json->access_token}";             
-    	
+     $template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$opt_json->access_token}";    
+                  
+     if($opt_json->auto_getnum!=0){
+        $auto_ret = get_user_info($opt_json->access_token,$openid);
+        $auto_json = json_decode($auto_ret);            
+	     switch($opt_json->auto_getnum){
+	       case 1:
+	          $opt_json->first = $auto_json->nickname; 
+	       break;
+	       case 2:
+	          $opt_json->keyword1 = $auto_json->nickname; 
+	       break;
+	       case 3:
+	          $opt_json->keyword2 = $auto_json->nickname; 
+	       break;
+	       case 4:
+	          $opt_json->keyword3 = $auto_json->nickname; 
+	       break;
+	       case 5:
+	          $opt_json->keyword4 = $auto_json->nickname; 
+	       break;
+	       case 6:
+	          $opt_json->keyword5 = $auto_json->nickname; 	        			  
+	       break;
+	     }
+     }
+     
      $post_arr = array(
 		"touser"=>$openid,
 		"template_id"=>$opt_json->temp_id,
@@ -92,5 +117,14 @@ function https_request($url,$data = NULL)
 	$output = curl_exec($curl);
 	curl_close($curl);
 	return $output;
+}
+
+//get-user_info
+function get_user_info($access_token,$openid){
+        if(!$access_token||!$openid){
+	    return -1;
+	} 
+        $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$access_token&openid=$openid&lang=zh_CN";
+        return https_request($url);		
 }
 ?>

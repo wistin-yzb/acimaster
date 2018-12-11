@@ -75,6 +75,7 @@ class Send extends Admin_Controller {
 					'remark'=>$_POST["remark"],
 					'remark_color'=>$_POST["remark_color"],
 					'url'=>$_POST["url"],
+					'auto_getnum'=>$_POST["auto_getnum"],
 					'push_status'=>$push_status,
 					'update_time'=>date('Y-m-d H:i:s'),
 			);			
@@ -177,6 +178,7 @@ class Send extends Admin_Controller {
 					'remark'=>$_POST["remark"],
 					'remark_color'=>$_POST["remark_color"],
 					'url'=>$_POST["url"],
+					'auto_getnum'=>$_POST["auto_getnum"],
 					'push_status'=>$push_status,
 					'update_time'=>date('Y-m-d H:i:s'),
 			);
@@ -298,6 +300,7 @@ class Send extends Admin_Controller {
 				'remark'=>$_POST["remark"],
 				'remark_color'=>$_POST["remark_color"],
 				'url'=>$_POST["url"],
+				'auto_getnum'=>$_POST["auto_getnum"],
 				'push_status'=>$push_status,
 				'update_time'=>date('Y-m-d H:i:s'),
 		);

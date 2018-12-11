@@ -61,6 +61,20 @@
 					           <img src="<?php echo SITE_URL?>images/templateexample.png" title="点击查看大图" class="templateexample"/>
 					       </a>
 					 </div>
+					 <div class="form-group">
+						<label class="col-sm-2 control-label">自动提取用户名显示位置</label>
+						<div class="col-sm-2">
+						  <select name="auto_getnum" id="auto_getnum" class="form-control" >
+						         <option value=0 <?php if($data_info['auto_getnum']==0):?>selected<?php endif;?>>0--默认不需要提取</option>						        
+						         <option value=1 <?php if($data_info['auto_getnum']==1):?>selected<?php endif;?>>1--开头first所在位置</option>
+						         <option value=2 <?php if($data_info['auto_getnum']==2):?>selected<?php endif;?>>2--中间keyword1所在位置</option>
+						         <option value=3 <?php if($data_info['auto_getnum']==3):?>selected<?php endif;?>>3--中间keyword2所在位置</option>
+						         <option value=4 <?php if($data_info['auto_getnum']==4):?>selected<?php endif;?>>4--中间keyword3所在位置</option>
+						         <option value=5 <?php if($data_info['auto_getnum']==5):?>selected<?php endif;?>>5--中间keyword4所在位置</option>
+						         <option value=6 <?php if($data_info['auto_getnum']==6):?>selected<?php endif;?>>6--中间keyword5所在位置</option>
+						  </select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label  class="col-sm-2 control-label">开头first<font color="red">*</font></label>
 						<div class="col-sm-4">
@@ -141,7 +155,7 @@
 						  <input name="url" type="text" onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" onblur="checksiteurl()" class="form-control" value="<?php echo $data_info['url']?>" id="url" placeholder="请以http|https://开头" size="400" />
 						  <span id="link_error_msg"></span>
 						</div>
-					</div>
+					</div>				
 			</fieldset>
             <input type="hidden" name="id" id="id" value="<?php echo $data_info['id']?>"/>
             <input type="hidden" name="push_status" id="push_status" value="<?php echo $data_info['push_status']?>"/>
