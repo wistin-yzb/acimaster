@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed.'); ?>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="<?php echo SITE_URL?>css/public.css" rel="stylesheet" >
 <link href="<?php echo SITE_URL?>css/spc.css" rel="stylesheet" media="only screen and (min-width:769px) and (max-width:1200px)">
 <link href="<?php echo SITE_URL?>css/bpc.css" rel="stylesheet" media="only screen and (min-width:1201px)">
