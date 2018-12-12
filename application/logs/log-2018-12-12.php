@@ -50,3 +50,15 @@ ERROR - 2018-12-12 14:06:50 --> Session: session.auto_start is enabled in php.in
 ERROR - 2018-12-12 14:06:56 --> Session: session.auto_start is enabled in php.ini. Aborting.
 ERROR - 2018-12-12 14:06:56 --> Session: session.auto_start is enabled in php.ini. Aborting.
 ERROR - 2018-12-12 14:06:57 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:21:35 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:21:35 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-12 16:21:35 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-12 16:22:49 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:22:50 --> 404 Page Not Found: Faviconico/index
+ERROR - 2018-12-12 16:22:51 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:22:52 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:22:53 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:22:54 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:23:24 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:23:25 --> Session: session.auto_start is enabled in php.ini. Aborting.
+ERROR - 2018-12-12 16:23:25 --> Session: session.auto_start is enabled in php.ini. Aborting.
