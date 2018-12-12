@@ -79,7 +79,7 @@
 						<label  class="col-sm-2 control-label">开头first<font color="red">*</font></label>
 						<div class="col-sm-4">
 						  <!-- <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="400" /> -->
-						  <textarea name="first"  id="first" class="form-control" style="height: 75px;" placeholder="(必填)"><?php echo $data_info['first']?></textarea>
+						  <textarea name="first"  id="first" class="form-control" style="height: 75px;" placeholder="(必填),涉及用户名请使用#号代替"><?php echo $data_info['first']?></textarea>
 						  <input type="text"  id="first_color" class="form-control keycolor" name="first_color" placeholder="字体颜色值" value="<?php echo $data_info['first_color']?>">
 						   <input type="color" class="form-control keycolorbtn" title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="first_color_btn" value="<?php echo $data_info['first_color']?>">
 						</div>
