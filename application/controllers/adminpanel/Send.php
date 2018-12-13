@@ -46,9 +46,10 @@ class Send extends Admin_Controller
             }
             $redis->auth('admin888');
             $redis->select('0');
-            $list = $redis->lrange('groupsend', 0, -1);
-            if ($list) {
-                exit(json_encode(array('status' => false, 'tips' => '请等待上次异步操作完成后再次操作')));
+            //核查队列是否已经占满
+            $verifyQueueUsage = $this->Send_model->verifyQueueUsage($redis);            
+            if ($verifyQueueUsage==-1) {
+                exit(json_encode(array('status' => false, 'tips' => '队列已占满,请等待异步操作完成后再次操作')));
             }
 
             //接收POST参数
@@ -61,6 +62,7 @@ class Send extends Admin_Controller
                 'service_id' => $_POST["service_id"],
                 'account_name' => $_POST["account_name"],
                 'temp_id' => $temp_id,
+            	'send_time' => strtotime($_POST["send_time"]),
                 'first' => $_POST["first"],
                 'first_color' => $_POST["first_color"],
                 'key_field1' => $_POST["key_field1"],
@@ -104,7 +106,7 @@ class Send extends Admin_Controller
                     //$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
                     //$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
                     $opt_data['access_token'] = $access_token;
-                    $inret = @$this->Send_model->inqueue($user_list, $opt_data);
+                    $inret = @$this->Send_model->inqueue($user_list, $opt_data,$verifyQueueUsage);
                     if ($inret) {
                         exit(json_encode(array('status' => true, 'tips' => '新增推送消息成功', 't_id' => $t_id)));
                     } else {
@@ -149,9 +151,10 @@ class Send extends Admin_Controller
             }
             $redis->auth('admin888');
             $redis->select('0');
-            $list = $redis->lrange('groupsend', 0, -1);
-            if ($list) {
-                exit(json_encode(array('status' => false, 'tips' => '请等待上次异步操作完成后再次操作')));
+            //核查队列是否已经占满
+            $verifyQueueUsage = $this->Send_model->verifyQueueUsage($redis);
+            if ($verifyQueueUsage==-1) {
+            	exit(json_encode(array('status' => false, 'tips' => '队列已占满,请等待异步操作完成后再次操作')));
             }
 
             $service_id = isset($_POST["service_id"]) ? trim(safe_replace($_POST["service_id"])) : exit(json_encode(array('status' => false, 'tips' => '请选择公众号')));
@@ -163,6 +166,7 @@ class Send extends Admin_Controller
                 'service_id' => $_POST["service_id"],
                 'account_name' => $_POST["account_name"],
                 'temp_id' => $temp_id,
+            	'send_time' => strtotime($_POST["send_time"]),
                 'first' => $_POST["first"],
                 'first_color' => $_POST["first_color"],
                 'key_field1' => $_POST["key_field1"],
@@ -207,7 +211,7 @@ class Send extends Admin_Controller
                     //$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk','oc-X_wi-d3K--y2k3YpLkzPzzzso'); //测试用户zoey,myr-openid
                     //$user_list = array('oc-X_wjs0ylwtyvwcXfLpM5fWVCk'); //测试用户zoey,myr-openid
                     $opt_data['access_token'] = $access_token;
-                    $inret = @$this->Send_model->inqueue($user_list, $opt_data);
+                    $inret = @$this->Send_model->inqueue($user_list, $opt_data,$verifyQueueUsage);
                     if ($inret) {
                         exit(json_encode(array('status' => true, 'tips' => '修改成功')));
                     } else {
@@ -245,9 +249,10 @@ class Send extends Admin_Controller
         }
         $redis->auth('admin888');
         $redis->select('0');
-        $list = $redis->lrange('groupsend', 0, -1);
-        if ($list) {
-            exit(json_encode(array('status' => false, 'tips' => '请等待上次异步操作完成后再次操作')));
+        //核查队列是否已经占满
+        $verifyQueueUsage = $this->Send_model->verifyQueueUsage($redis);
+        if ($verifyQueueUsage==-1) {
+        	exit(json_encode(array('status' => false, 'tips' => '队列已占满,请等待异步操作完成后再次操作')));
         }
 
         $service_id = isset($_POST["service_id"]) ? trim(safe_replace($_POST["service_id"])) : exit(json_encode(array('status' => false, 'tips' => '请选择公众号')));
@@ -285,6 +290,7 @@ class Send extends Admin_Controller
             'service_id' => $service_id,
             'account_name' => $_POST["account_name"],
             'temp_id' => $temp_id,
+        	'send_time' => strtotime($_POST["send_time"]),
             'first' => $first,
             'first_color' => $_POST["first_color"],
             'key_field1' => $key_field1,
@@ -324,7 +330,7 @@ class Send extends Admin_Controller
         if ($access_token != -1 && !empty($access_token)) {
             $user_list = array($test_openid); //测试用户openid
             $opt_data['access_token'] = $access_token;
-            $inret = @$this->Send_model->inqueue($user_list, $opt_data);
+            $inret = @$this->Send_model->inqueue($user_list, $opt_data,$verifyQueueUsage);
             if ($inret) {
                 exit(json_encode(array('status' => true, 'tips' => '测试发送成功')));
             } else {

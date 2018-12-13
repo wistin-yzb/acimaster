@@ -3,18 +3,24 @@ $redis = new redis();
 $redis->connect('127.0.0.1', 6379);
 $redis->auth('admin888');
 $redis->select('0');
-$list = $redis->lrange('groupsend', 0, -1);
+$grouptime = $redis->lrange('grouptime0',0,-1); 
+if($grouptime[0]>time()){
+	$redis->close();exit();
+}
+
+$list = $redis->lrange('groupsend0', 0, -1);
 if ($list) {
     $i = 0;
-    $len = $redis->lLen('groupsend');
+    $len = $redis->lLen('groupsend0');
     while (true) {
         if ($i >= $len) {
+	    $redis->lpop('grouptime0');
             $redis->close();
-            file_put_contents('/usr/local/etc/outqueuecok.txt', 1);
-            @unlink('/usr/local/etc/groupdata.txt');
+            file_put_contents('/usr/local/etc/outqueuecok0.txt', 1);
+            @unlink('/usr/local/etc/groupdata0.txt');
             exit();
         }
-        $openid = $redis->lpop('groupsend');
+        $openid = $redis->lpop('groupsend0');
         if ($openid) {
             //send-msg
             send_template_msg($openid);
@@ -36,7 +42,7 @@ function send_template_msg($openid)
         return -1;
     }
 
-    $opt_json = json_decode(file_get_contents('/usr/local/etc/groupdata.txt'));
+    $opt_json = json_decode(file_get_contents('/usr/local/etc/groupdata0.txt'));
     $template_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$opt_json->access_token}";
 
     if ($opt_json->auto_getnum != 0) {
@@ -100,10 +106,8 @@ function send_template_msg($openid)
             ),
         ),
     );
-    $post_json = json_encode($post_arr);
-    //file_put_contents('/usr/local/etc/outqueue-debug.txt',$post_json.PHP_EOL,FILE_APPEND);
-    $ret = https_request($template_url, $post_json);
-    //file_put_contents('/usr/local/etc/outqueue-last.txt',$ret.PHP_EOL,FILE_APPEND);
+    $post_json = json_encode($post_arr);    
+    $ret = https_request($template_url, $post_json);    
 }
 
 /**

@@ -76,6 +76,12 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label  class="col-sm-2 control-label">定时发送时间<font color="red">*</font></label>
+						<div class="col-sm-2">
+						   <input name="send_time" type="text" class="form-control" id="send_time" placeholder="请选择发送时间" value="<?php echo $data_info['send_time']?>" size="400" /> 						 
+						</div>
+					</div>
+					<div class="form-group">
 						<label  class="col-sm-2 control-label">开头first<font color="red">*</font></label>
 						<div class="col-sm-4">
 						  <!-- <input name="first" type="text" class="form-control" id="first" placeholder="(必填)" value="<?php echo $data_info['first']?>" size="400" /> -->
@@ -177,19 +183,19 @@
 	require(['<?php echo SITE_URL?>scripts/common.js'], function (common) {	
 	require(['<?php echo SITE_URL?>scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/edit.js']);		
 	 require(['<?php echo SITE_URL?>scripts/Magnific-Popup-master/dist/jquery.magnific-popup.min.js']);
-		 //require(['<?php echo SITE_URL?>scripts//jedate-6.5.0/dist/jedate.min.js'],function(jeDate) {
-		 //       jeDate("#send_time",{
-		 //       	theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
-		 //           format:"YYYY-MM-DD hh:mm:ss",
-		 //           isTime:true,
-		 //           isToday:true, 
-		 //           isClear:true, 
-		 //           minDate:"2014-09-19 00:00:00",
-		  //          donefun:function(obj) {
-          //                   $('#send_time').parent().parent().removeClass('has-error').addClass('has-success');
-		//	       },   
-	     //       }) 
-		//    });
+		require(['<?php echo SITE_URL?>scripts//jedate-6.5.0/dist/jedate.min.js'],function(jeDate) {
+		        jeDate("#send_time",{
+		        	theme:{ bgcolor:"#00A1CB",color:"#ffffff", pnColor:"#00CCFF"},
+		            format:"YYYY-MM-DD hh:mm:ss",
+		            isTime:true,
+		            isToday:true, 
+		            isClear:true, 
+		            minDate:"2014-09-19 00:00:00",
+		            donefun:function(obj) {
+                             //$('#send_time').parent().parent().removeClass('has-error').addClass('has-success');
+			       },   
+	            }) 
+		    });
 	});	
 </script>
 <link rel="stylesheet" href="<?php echo SITE_URL?>scripts/jedate-6.5.0/skin/jedate.css">

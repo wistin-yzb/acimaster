@@ -20,6 +20,7 @@ class Send_model extends Base_Model
         return array(
             'id' => 0,
             'temp_id' => '',
+        	'send_time' => '',
             'first' => '',
             'first_color' => '#000000',
             'keyword1' => '',
@@ -53,21 +54,22 @@ class Send_model extends Base_Model
      * @param $opt_data
      * @return bool
      */
-    function inqueue($data, $opt_data)
+    function inqueue($data, $opt_data,$wp=0)
     {
         if (empty($data)) return false;
         $redis = new redis();
         $redis->connect('127.0.0.1', 6379);
         $redis->auth('admin888');
-        $redis->select('0');
+        $redis->select('0');       
         $i = 0;
         while (true) {
             if ($i >= count($data)) {
-                file_put_contents('/usr/local/etc/groupdata.txt', json_encode($opt_data));
+            	file_put_contents("/usr/local/etc/groupdata".$wp.".txt", json_encode($opt_data));
+            	$redis->rpush('grouptime'.$wp, $opt_data['send_time']); //定时发送时间
                 $redis->close();
                 return true;
             }
-            $redis->rpush('groupsend', $data[$i]);
+            $redis->rpush('groupsend'.$wp, $data[$i]);
             $i++;
         }
     }
@@ -364,4 +366,24 @@ class Send_model extends Base_Model
         curl_close($curl);
         return $output;
     }
+    
+    /**
+     * 核查队列是否已经占满
+     */
+    function verifyQueueUsage($redis){
+    	$list0 = $redis->lrange('groupsend0', 0, -1);
+    	$list1 = $redis->lrange('groupsend1', 0, -1);
+    	$list2 = $redis->lrange('groupsend2', 0, -1);
+    	$list3 = $redis->lrange('groupsend3', 0, -1);
+    	$list4 = $redis->lrange('groupsend4', 0, -1);
+    	$list5 = $redis->lrange('groupsend5', 0, -1);
+    	$arr = array($list0,$list1,$list2,$list3,$list4,$list5);
+    	foreach ($arr as $key=>$val){
+    		if(empty($val)){
+    			return $key;
+    		}
+    	}
+    	return -1;
+    }
+    
 }

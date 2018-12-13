@@ -302,6 +302,7 @@ define(function (require) {
 function testSend(){
 	var service_id = $.trim($('#service_id').val());
 	var temp_id  = $.trim($("input[name='temp_id']:checked").val());
+	var send_time  = $.trim($('#send_time').val());
 	var first = $.trim($('#first').val());
 	var first_color = $.trim($('#first_color').val());
 	
@@ -335,7 +336,7 @@ function testSend(){
 	var auto_getnum  = $.trim($('#auto_getnum').val());
 	
 	var test_openid = $.trim($('#test_openid').val());
-	var params = {"test_openid":test_openid,"service_id":service_id,"temp_id":temp_id,"first":first,"first_color":first_color,
+	var params = {"test_openid":test_openid,"service_id":service_id,"temp_id":temp_id,"send_time":send_time,"first":first,"first_color":first_color,
 			                       "key_field1":key_field1,"keyword1":keyword1,"keyword1_color":keyword1_color,"key_field2":key_field2,"keyword2":keyword2,"keyword2_color":keyword2_color,"key_field3":key_field3,
 			                       "keyword3":keyword3,"keyword3_color":keyword3_color,"account_name":account_name,"key_field4":key_field4,"keyword4":keyword4,"keyword4_color":keyword4_color,"key_field5":key_field5,
 			                       "keyword5":keyword5,"keyword5_color":keyword5_color,"invest_style":invest_style,"invest_profit":invest_profit,"remark":remark,"remark_color":remark_color,"url":url,"auto_getnum":auto_getnum
