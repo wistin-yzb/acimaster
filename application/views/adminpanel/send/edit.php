@@ -134,19 +134,7 @@
 						 <input type="text"  id="keyword5_color" class="form-control keycolormid" name="keyword5_color" placeholder="字体颜色值" value="<?php echo $data_info['keyword5_color']?>">
 						   <input type="color" class="form-control keycolorbtnmid" title="点击设置字体颜色" style="cursor:pointer;padding-right:10px;" id="keyword5_color_btn" value="<?php echo $data_info['keyword5_color']?>">
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">中间invest_style</label>
-						<div class="col-sm-4">
-						  <input name="invest_style" type="text" class="form-control"  value="<?php echo $data_info['invest_style']?>" id="invest_style" placeholder="非必填" size="400" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">中间invest_profit</label>
-						<div class="col-sm-4">
-						  <input name="invest_profit" type="text" class="form-control" value="<?php echo $data_info['invest_profit']?>" id="invest_profit" placeholder="非必填" size="400" />
-						</div>
-					</div>
+					</div>				
 					<div class="form-group">
 						<label class="col-sm-2 control-label">结尾remark</label>
 						<div class="col-sm-4">
@@ -166,11 +154,16 @@
             <input type="hidden" name="id" id="id" value="<?php echo $data_info['id']?>"/>
             <input type="hidden" name="push_status" id="push_status" value="<?php echo $data_info['push_status']?>"/>
             <input type="hidden" name="account_name" id="account_name" value="<?php echo $data_info['account_name']?>"/>
+             <input type="hidden" name="invest_style"  id="invest_style"  value="<?php echo $data_info['invest_style']?>"/>
+             <input type="hidden" name="invest_profit"  id="invest_profit"  value="<?php echo $data_info['invest_profit']?>"/>             
 		<div class='form-actions'>
 		         <?php aci_ui_button($folder_name,'send','edit',' type="submit" id="dosubmit" class="btn btn-primary " ','立即推送')?>
 		         <span class="testsend"><input type="text" id="test_openid" placeholder="请输入测试用户openid"></span>
-		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()"><i class="fa fa-star-half">&nbsp;测试发送</i></a></span><br/>
-		         <span class="footremark">测试用户openid请到<font color="red">配置公众号</font>栏目<i class="fa fa-angle-double-right"></i><font color="red">查看用户列表</font>,自己搜索获取即可.如遇无法操作问题,请联系系统管理人员</span>		          		           
+		         <span style="cursor:pointer;"><a class="btn btn-info btn-xs" onclick="testSend()"><i class="fa fa-star-half">&nbsp;测试发送</i></a>		         
+		         </span><br/>
+		        <span class="footremark"><a href="javascript:;" class="btn btn-link  btn-xs" onclick="openwindow('/adminpanel/service/index','搜索openid',1200,450)">
+		         <i class="fa fa-hand-o-right"></i> &nbsp;搜索openid</a></span><br/>
+		         <span class="footremark">操作提示:测试用户openid请到<font color="red">配置公众号</font>栏目<i class="fa fa-angle-double-right"></i><font color="red">查看用户列表</font>,自己搜索获取即可.如遇无法操作问题,请联系系统管理人员</span>		          		           
 		</div>
      </div>
   </div>

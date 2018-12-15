@@ -245,6 +245,7 @@ class Send_model extends Base_Model
             $openid_arr_5 = $json_5['data']['openid'];
             $total_openid_arr = array_merge($openid_arr, $openid_arr_2, $openid_arr_3, $openid_arr_4, $openid_arr_5);
         }
+        if($total_openid_arr)
         file_put_contents('alluserlist.txt', json_encode($total_openid_arr));
         return $total_openid_arr;
     }
@@ -293,6 +294,7 @@ class Send_model extends Base_Model
             $openid_arr_5 = $json_5['data']['openid'];
             $total_openid_arr = array_merge($openid_arr, $openid_arr_2, $openid_arr_3, $openid_arr_4, $openid_arr_5);
         }
+        if($total_openid_arr)
         file_put_contents("batchuserlist_" . $appid . ".txt", json_encode($total_openid_arr));
         return $total_openid_arr;
     }
